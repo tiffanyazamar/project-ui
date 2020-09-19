@@ -21,7 +21,7 @@ export class MaintenanceTComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getTickets();
+   
   }
   getTickets() {
     this.ms.getAllTickets().subscribe(
