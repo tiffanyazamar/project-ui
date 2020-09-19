@@ -1,0 +1,60 @@
+<div class="card login">
+  <div class="card-body">
+    <div class="form-group">
+      <div class="form-group">
+        <label for="name">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          required
+          [(ngModel)]="model.username"
+          name="username"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          required
+          [(ngModel)]="model.username"
+          name="password"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          [(ngModel)]="model.firstName"
+          name="firstName"
+        />
+        <label for="lastName">Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          [(ngModel)]="model.lastName"
+          name="lastName"
+        />
+      </div>
+      <div class="form-group"></div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phoneNumber"
+          [(ngModel)]="model.phoneNumber"
+          name="phoneNumber"
+        />
+      </div>
+
+      <button class="btn btn-success" (click)="register()">Register</button>
+    </div>
+  </div>
+</div>
