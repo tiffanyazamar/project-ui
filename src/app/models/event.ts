@@ -1,6 +1,6 @@
 import { User } from './user';
 
-export class Eevent {
+export class Event {
     public eventID:number;
     public eventName:String;
     public eventDescription:String;

@@ -1,144 +1,117 @@
+<style>
+tbody {
+  color:white;
+}
+</style>
+
 <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title"> View All Maintenance Tickets</h4>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table">
-              <thead class=" text-primary">
-                <th>
-                    ID
-                </th>
-                <th>
-                    Created By
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Submission Time
-                </th>
-                <th>
-                    Resolved Time
-                </th>
-                <th class="text-right">
-                    Status
-                </th>
-              </thead>
-              <!-- <div *ngIf="loggedInUser.userRole == 'landlord'"> -->
-              <tbody >
-                <tr *ngFor="let t of tickets" >
-                  <td>
-                    {{t.ticketId}}
-                  </td>
-                  <td>
-                    {{t.author.firstName}} {{t.author.lastName}}
-                  </td>
-                  <td>
-                    {{t.description}}
-                  </td>
-                  <td>
-                    {{t.submitted | date:'medium' }}
-                  </td>
-                  <td>
-                    {{t.resolved | date:'medium' }}
-                  </td>
-                  <td class="text-right">
-                    {{t.statusId.status}}
-                  </td>
-                </tr>
-            </tbody>
-            <!-- </div> -->
-            <!-- <div *ngIf="loggedInUser.userRole == 'tenant'">
-                <tbody>
-                <tr *ngFor="let t of loggedInUser.tickets">
-                  <td>
-                    {{t.ticketId}}
-                  </td>
-                  <td>
-                    {{loggedInUser.firstName}} {{loggedInUser.lastName}}
-                  </td>
-                  <td>
-                    {{t.description}}
-                  </td>
-                  <td>
-                    {{t.submitted | date:'medium' }}
-                  </td>
-                  <td>
-                    {{t.resolved | date:'medium' }}
-                  </td>
-                  <td class="text-right">
-                    {{t.statusId.status}}
-                  </td>
-                </tr>
-            </tbody>
-            </div> -->
-            </table>
-            <button class="btn btn-primary" (click)="getTickets()">View All Tickets</button>
-          </div>
-        </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title"> View All Maintenance Tickets</h4>
       </div>
+      <div class="card-body">
+      </div>
+      <select name="tickets" class="card">
+        <option value="1">All Tickets</option>
+        <option value="2">Unresolved Tickets</option>
+        <option value="3">Resolved Tickets</option>
+    </select>
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>
+                  ID
+              </th>
+              <th>
+                  Created By
+              </th>
+              <th>
+                  Description
+              </th>
+              <th>
+                  Submission Time
+              </th>
+              <th>
+                  Resolved Time
+              </th>
+              <th class="text-right">
+                  Status
+              </th>
+            </thead>
+            
+            <tbody *ngIf="loggedInUser.userRole.role == 'Tenant'">
+              <tr *ngFor="let t of tickets" >
+                <td>
+                  {{t.ticketId}}
+                </td>
+                <td>
+                  {{t.author.firstName}} {{t.author.lastName}}
+                </td>
+                <td>
+                  {{t.description}}
+                </td>
+                <td>
+                  {{t.submitted | date:'medium' }}
+                </td>
+                <td>
+                  {{t.resolved | date:'medium' }}
+                </td>
+                <td class="text-right">
+                  {{t.statusId.status}}
+                </td>
+              </tr>
+              <button class="btn btn-primary" (click)="getTickets()">View All Tickets</button>
+          </tbody>
+         
+              <!-- <tbody *ngIf="loggedInUser.userRole.role=='Tenant'">
+              <tr *ngFor="let t of loggedInUser.tickets">
+                <td>
+                  {{t.ticketId}}
+                </td>
+                <td>
+                  {{loggedInUser.firstName}} {{loggedInUser.lastName}}
+                </td>
+                <td>
+                  {{t.description}}
+                </td>
+                <td>
+                  {{t.submitted | date:'medium' }}
+                </td>
+                <td>
+                  {{t.resolved | date:'medium' }}
+                </td>
+                <td class="text-right">
+                  {{t.statusId.status}}
+                </td>
+              </tr>
+              <button class="btn btn-primary" (click)="getTickets()">View All Tickets</button>
+          </tbody>
+   -->
+          </table>
+          <br>
     </div>
-    
+
   </div>
-  
+</div>
+</div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+    <br>
+    <h4>Open a New Maintenance Ticket</h4>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" class="form-control" [(ngModel)]="model.description" id="description" />
+  </div>
+  <button class="btn btn-primary" (click)="sendTicket()">Submit</button>
 
-<select name="tickets">
-    <option value="1">Unresolved Tickets</option>
-    <option value="2">Resolved Tickets</option>
-</select>
+  </div>
+</div>
+</div>
 
-<!-- <div id="">
-    <table class="">
-        <thead>
-            <tr class="">
-                <th id="">ID</th>
-                <th id="">Description</th>
-                <th id="">Submission Time</th>
-                <th id="">Resolved Time</th>
-                <th id="">Created By</th>
-                <th id="">Status</th>
-            </tr>
-        </thead>
-        <tbody class="" id="">
-            <div *ngIf="loggedInUser.userRole = 'landlord'">
-            <tr  *ngFor="let t of tickets">
-                <td>{{t.ticketId}}</td>
-                <td>{{t.author.firstName}} {{t.author.lastName}}</td>
-                <td>{{t.description}}</td>
-                <td>{{t.submitted | date:'medium' }}</td>
-                <td>{{t.resolved | date:'medium' }}</td>
-                <td>{{t.statusId.status}}</td>
-            </tr>
-        </div> 
-         <div *ngIf="loggedInUser.userRole = 'tenant'" > 
-            <tr *ngFor="let t of loggedInUser.tickets">
-                <td>{{t.ticketId}}</td>
-                <td>{{loggedInUser.firstName}} {{loggedInUser.lastName}}</td>
-                <td>{{t.description}}</td>
-                <td>{{t.submitted | date:'medium' }}</td>
-                <td>{{t.resolved | date:'medium' }}</td>
-                <td>{{t.statusId}}</td>
-            </tr>
-         </div> 
-        </tbody>
-    </table>
-</div> -->
 
-<form method="" action="">
-    <div class="">
-        <h2>Open a New Maintenance Ticket</h2>
-        <p></p>
-    </div>
-    <div class="">
-        <label class="description" for="desc">Description </label>
-        <div>
-            <input name="desc" [(ngModel)]="newTicketDesc">
-        </div>
-        <br /><br />
-        <button  (click)="sendTicket()" type="button">SUBMIT</button>
-    </div>
-</form>
+
+    
+
 

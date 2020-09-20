@@ -1,3 +1,8 @@
+<style>
+  tbody {
+    color: white;
+  }
+</style>
 <div class="row">
   <div class="col-md-12">
     <div class="card">
@@ -14,8 +19,9 @@
               <th>Guest List</th>
               <th class="text-right">Date</th>
             </thead>
+
             <tbody>
-              <tr *ngFor="let e of loggedInUser.eventList">
+              <tr *ngFor="let e of events">
                 <td>{{e.eventName}}</td>
                 <td>{{e.eventDescription}}</td>
                 <td>{{e.eventCreator.firstName}}</td>
@@ -26,8 +32,22 @@
                 </td>
                 <td class="text-right">{{e.eventDate | date:'medium'}}</td>
               </tr>
-              
+              <!-- <button class="btn btn-primary" (click)="getEvents()">View All Events</button> -->
             </tbody>
+            <!-- <h3>Past Events</h3>
+            <tbody>
+              <tr *ngFor="let e of events">
+                <td>{{e.eventName}}</td>
+                <td>{{e.eventDescription}}</td>
+                <td>{{e.eventCreator.firstName}}</td>
+                <td>
+                  <li *ngFor="let u of e.userList">
+                    <ul>{{u.firstName}}</ul>
+                  </li>
+                </td>
+                <td class="text-right">{{e.eventDate | date:'medium'}}</td>
+              </tr>
+            </tbody> -->
           </table>
         </div>
       </div>
@@ -35,29 +55,33 @@
   </div>
 </div>
 
-<form method="" action="">
+<form method="" action="" *ngIf="loggedInUser.userRole.role=='Landlord'">
   <div class="">
-      <h2>Create New Event</h2>
-      <p></p>
+    <h2>Create New Event</h2>
+    <p></p>
   </div>
   <div class="">
-      <label class="" for="name">Name of Event </label>
-      <div>
-          <input name="name" [(ngModel)]="newEventName">
-      </div>
-      <label class="" for="desc">Description </label>
-      <div>
-          <input name="desc" [(ngModel)]="newEventDesc">
-      </div>
-      <label class="" for="date">Date and Time </label>
-      <div>
-          <input name="date" [(ngModel)]="newEventDate">
-      </div>
-      <label class="" for="guest">Guest List </label>
-      <div>
-          <input name="guest" [(ngModel)]="guestList">
-      </div>
-      <br /><br />
-      <button  (click)="sendEvent()" type="button">SUBMIT</button>
+    <label class="" for="name">Name of Event </label>
+    <div>
+      <input name="name" [(ngModel)]="newEventName">
+    </div>
+    <label class="" for="desc">Description </label>
+    <div>
+      <textarea name="desc" rows="3" cols="50" [(ngModel)]="newEventDesc"></textarea>
+    </div>
+    <label class="" for="date">Date </label>
+    <div>
+      <input name="date" type="datetime-local" [(ngModel)]="newEventDate">
+    </div>
+    <label class="" for="guest">Guest List </label>
+    <div>
+      <input name="guest" id="guestId" type="text" placeholder="Enter Guest ID" [(ngModel)]="newGuest">
+      <button (click)="addGuestByID()" type="button">Add Guest</button>
+        <li *ngFor="let u of guestList">
+          <ol>ID: {{u.userID}}  {{u.firstName}} {{u.lastName}}</ol>
+        </li>
+    </div>
+    <br /><br />
+    <button (click)="sendEvent()" type="submit">SUBMIT</button>
   </div>
 </form>

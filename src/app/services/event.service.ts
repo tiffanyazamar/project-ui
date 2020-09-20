@@ -20,6 +20,18 @@ export class EventService {
     return this.http.get<Event[]>(this.url);
   }
 
+  getEventsByGuest(id:number) :Observable<Event[]> {
+    return this.http.get<Event[]>(this.url+"guest/"+id);
+  }
+
+  getAllUsers() :Observable<User[]> {
+    return this.http.get<User[]>("http://localhost:8080/chatelaine/user/")
+  }
+
+  getUserByID(id:number) :Observable<User>{
+    return this.http.get<User>("http://localhost:8080/chatelaine/user/id/"+id)
+  }
+
   // getEventsByParticipant(user:User):Observable<Event[]> {
   //   return this.http.get<Event[]>(this.url+"user/"+user);
   // }
