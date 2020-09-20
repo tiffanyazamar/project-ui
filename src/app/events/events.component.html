@@ -2,129 +2,62 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title"> Simple Table</h4>
+        <h4 class="card-title">EVENTS</h4>
       </div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table">
             <thead class=" text-primary">
-              <th>
-                Name
-              </th>
-              <th>
-                Country
-              </th>
-              <th>
-                City
-              </th>
-              <th class="text-right">
-                Salary
-              </th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Creator</th>
+              <th>Guest List</th>
+              <th class="text-right">Date</th>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let e of loggedInUser.eventList">
+                <td>{{e.eventName}}</td>
+                <td>{{e.eventDescription}}</td>
+                <td>{{e.eventCreator.firstName}}</td>
                 <td>
-                  Dakota Rice
+                  <li *ngFor="let u of e.userList">
+                    <ul>{{u.firstName}}</ul>
+                  </li>
                 </td>
-                <td>
-                  Niger
-                </td>
-                <td>
-                  Oud-Turnhout
-                </td>
-                <td class="text-right">
-                  $36,738
-                </td>
+                <td class="text-right">{{e.eventDate | date:'medium'}}</td>
               </tr>
-              <tr>
-                <td>
-                  Minerva Hooper
-                </td>
-                <td>
-                  Curaçao
-                </td>
-                <td>
-                  Sinaai-Waas
-                </td>
-                <td class="text-right">
-                  $23,789
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Sage Rodriguez
-                </td>
-                <td>
-                  Netherlands
-                </td>
-                <td>
-                  Baileux
-                </td>
-                <td class="text-right">
-                  $56,142
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Philip Chaney
-                </td>
-                <td>
-                  Korea, South
-                </td>
-                <td>
-                  Overland Park
-                </td>
-                <td class="text-right">
-                  $38,735
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Doris Greene
-                </td>
-                <td>
-                  Malawi
-                </td>
-                <td>
-                  Feldkirchen in Kärnten
-                </td>
-                <td class="text-right">
-                  $63,542
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Mason Porter
-                </td>
-                <td>
-                  Chile
-                </td>
-                <td>
-                  Gloucester
-                </td>
-                <td class="text-right">
-                  $78,615
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  Jon Porter
-                </td>
-                <td>
-                  Portugal
-                </td>
-                <td>
-                  Gloucester
-                </td>
-                <td class="text-right">
-                  $98,615
-                </td>
-              </tr>
+              
             </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
-  
 </div>
+
+<form method="" action="">
+  <div class="">
+      <h2>Create New Event</h2>
+      <p></p>
+  </div>
+  <div class="">
+      <label class="" for="name">Name of Event </label>
+      <div>
+          <input name="name" [(ngModel)]="newEventName">
+      </div>
+      <label class="" for="desc">Description </label>
+      <div>
+          <input name="desc" [(ngModel)]="newEventDesc">
+      </div>
+      <label class="" for="date">Date and Time </label>
+      <div>
+          <input name="date" [(ngModel)]="newEventDate">
+      </div>
+      <label class="" for="guest">Guest List </label>
+      <div>
+          <input name="guest" [(ngModel)]="guestList">
+      </div>
+      <br /><br />
+      <button  (click)="sendEvent()" type="button">SUBMIT</button>
+  </div>
+</form>

@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaintenanceTComponent } from './maintenance-t/maintenance-t.component'
 
 
 
@@ -37,6 +38,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DashboardComponent,
     UserComponent,
     EventsComponent,
+    MaintenanceTComponent
   ],
   imports: [
     BrowserAnimationsModule,

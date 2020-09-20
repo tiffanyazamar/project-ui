@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from 'app/services/event.service';
+import { AuthService } from 'app/auth.service';
+import { User } from 'app/models/user';
+import { Eevent } from '../models/event';
 
-declare interface TableData {
-    headerRow: string[];
-    dataRows: string[][];
-}
+// declare interface TableData {
+//     headerRow: string[];
+//     dataRows: string[][];
+// }
 
 @Component({
     selector: 'events',
@@ -12,30 +16,33 @@ declare interface TableData {
 })
 
 export class EventsComponent implements OnInit{
-    public tableData1: TableData;
-    public tableData2: TableData;
+    // public tableData1: TableData;
+    // public tableData2: TableData;
+
+    loggedInUser:User;
+    events : Eevent[];
+    newEventName:String;
+    newEventDesc:String;
+    newEventDate:any;
+    guestList:User[];
+  
+    constructor(private es:EventService, private authservice: AuthService) {
+      this.loggedInUser = authservice.loggedInUser;
+     }
+     
     ngOnInit(){
-        this.tableData1 = {
-            headerRow: [ 'ID', 'Name', 'Country', 'City', 'Salary'],
-            dataRows: [
-                ['1', 'Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738'],
-                ['2', 'Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789'],
-                ['3', 'Sage Rodriguez', 'Netherlands', 'Baileux', '$56,142'],
-                ['4', 'Philip Chaney', 'Korea, South', 'Overland Park', '$38,735'],
-                ['5', 'Doris Greene', 'Malawi', 'Feldkirchen in Kärnten', '$63,542'],
-                ['6', 'Mason Porter', 'Chile', 'Gloucester', '$78,615']
-            ]
-        };
-        this.tableData2 = {
-            headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
-            dataRows: [
-                ['1', 'Dakota Rice','$36,738', 'Niger', 'Oud-Turnhout' ],
-                ['2', 'Minerva Hooper', '$23,789', 'Curaçao', 'Sinaai-Waas'],
-                ['3', 'Sage Rodriguez', '$56,142', 'Netherlands', 'Baileux' ],
-                ['4', 'Philip Chaney', '$38,735', 'Korea, South', 'Overland Park' ],
-                ['5', 'Doris Greene', '$63,542', 'Malawi', 'Feldkirchen in Kärnten', ],
-                ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
-            ]
-        };
     }
+
+    sendEvent() {
+        let e = new Eevent(0, this.newEventName, this.newEventDesc, this.newEventDate, this.authservice.loggedInUser, this.guestList)
+        console.log(e);
+        this.es.addEvent(e).subscribe(
+          (response:Eevent[]) => {
+            this.events = response;
+            console.log(this.events)
+          }
+        )
+      }
+
+
 }
