@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Ticket } from 'ticket';
-import { MaintenanceService } from 'maintenance.service';
+import { Ticket } from '../models/ticket';
+import { MaintenanceService } from '../services/maintenance.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
 
