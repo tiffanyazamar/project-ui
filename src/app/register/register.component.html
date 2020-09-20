@@ -19,11 +19,21 @@
           class="form-control"
           id="password"
           required
-          [(ngModel)]="model.username"
+          [(ngModel)]="model.password"
           name="password"
         />
       </div>
-
+      <div class="form-group">
+        <label for="confirm-password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          required
+          [(ngModel)]="confirmPassword"
+          name="confirm-password"
+        />
+      </div>
       <div class="form-group">
         <label for="firstName">First Name</label>
         <input

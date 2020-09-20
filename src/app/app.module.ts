@@ -49,7 +49,7 @@ import { RegisterComponent } from './register/register.component';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule
+    RouterModule,
   ],
   providers: [AuthService,
     HttpClient],
