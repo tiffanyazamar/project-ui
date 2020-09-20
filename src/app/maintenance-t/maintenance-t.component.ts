@@ -36,6 +36,7 @@ export class MaintenanceTComponent implements OnInit {
       (response: Ticket[]) => {
         this.tickets = response;
         console.log(this.tickets)
+        console.log(this.loggedInUser.userRole.role)
       }
     )
   }
