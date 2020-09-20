@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+<<<<<<< HEAD
 import { Ticket } from '../ticket';
 import { MaintenanceService } from 'maintenance.service';
+=======
+import { Ticket } from '../models/ticket';
+import { MaintenanceService } from '../services/maintenance.service';
+>>>>>>> e33864b3753980636592ce8a47ac0189ab97cace
 import { FormControl, FormGroup } from '@angular/forms';
 
 
@@ -20,6 +25,10 @@ export class MaintenanceTComponent implements OnInit {
     description: ''
     
   };
+<<<<<<< HEAD
+=======
+
+>>>>>>> e33864b3753980636592ce8a47ac0189ab97cace
 
 
   constructor(private ms: MaintenanceService, private authService: AuthService) {
