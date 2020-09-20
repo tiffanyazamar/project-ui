@@ -2,7 +2,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title"> Simple Table</h4>
+          <h4 class="card-title"> View All Maintenance Tickets</h4>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -28,8 +28,8 @@
                 </th>
               </thead>
               <!-- <div *ngIf="loggedInUser.userRole == 'landlord'"> -->
-              <tbody  >
-                <tr *ngFor="let t of tickets">
+              <tbody >
+                <tr *ngFor="let t of tickets" >
                   <td>
                     {{t.ticketId}}
                   </td>
@@ -135,9 +135,10 @@
     <div class="">
         <label class="description" for="desc">Description </label>
         <div>
-            <textarea name="desc" rows="4" cols="50" maxlength="500" [(ngModel)]="newTicketDesc"></textarea>
+            <input name="desc" [(ngModel)]="newTicketDesc">
         </div>
         <br /><br />
         <button  (click)="sendTicket()" type="button">SUBMIT</button>
     </div>
 </form>
+

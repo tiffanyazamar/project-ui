@@ -6,13 +6,13 @@ export class Ticket {
     public description:String;
     public submitted:any;
     public resolved:any;
-    public author:any;
-    public statusId:any;
+    public author:User;
+    public statusId:Status;
 
-    constructor(ticketId:number, description:String, submitted:any, resolved:any, author:any, statusId:any) {
+    constructor(ticketId:number, description:String, submitted:any, resolved:any, author:User, statusId:Status) {
         this.ticketId = ticketId,
         this.description = description,
-        this.submitted = new Date(submitted).toLocaleString(),
+        this.submitted = submitted,
         this.resolved = resolved,
         this.author = author,
         this.statusId = statusId
