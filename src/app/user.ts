@@ -9,18 +9,20 @@ export class User {
     public lastName:String;
     public phoneNumber:String;
     public userRole:UserRole;
-    public eventList:Array<Event>;
-    public tickets:Array<Ticket>;
+    //public eventList:Array<Event>;
+   // public tickets:Array<Ticket>;
 
-    constructor(userID:String, username:String, password:String, firstName:String, lastName:String, phoneNumber:String, userRole:UserRole, eventList:Array<Event>, tickets:Array<Ticket>){
+
+    constructor(userID:String, username:String, password:String, firstName:String, lastName:String, phoneNumber:String, userRole:UserRole){
         this.userID=userID,
         this.username=username,
         this.password=password,
         this.firstName=firstName,
         this.lastName=lastName,
         this.phoneNumber=phoneNumber,
-        this.userRole=userRole,
-        this.eventList=eventList,
-        this.tickets=tickets
+        this.userRole=userRole
+        //this.eventList=eventList,
+        //this.tickets=tickets
     }
+    
 }

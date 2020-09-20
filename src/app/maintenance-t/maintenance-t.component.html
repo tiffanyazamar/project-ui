@@ -34,7 +34,7 @@
                     {{t.ticketId}}
                   </td>
                   <td>
-                    {{t.author.firstName}} {{t.author.lastName}}
+                    {{t.author?}} 
                   </td>
                   <td>
                     {{t.description}}
@@ -78,17 +78,21 @@
             </table>
             <button class="btn btn-primary" (click)="getTickets()">View All Tickets</button>
           </div>
-        </div>
+          <select name="tickets">
+            <option value="1">Unresolved Tickets</option>
+            <option value="2">Resolved Tickets</option>
+        </select>
+        <h4>Open a New Maintenance Ticket</h4>
+<div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" class="form-control" [(ngModel)]="model.description" id="description" />
+  </div>
+  <button class="btn btn-primary" (click)="sendTicket()">Submit</button>
       </div>
     </div>
-    
+</div>
   </div>
-  
 
-<select name="tickets">
-    <option value="1">Unresolved Tickets</option>
-    <option value="2">Resolved Tickets</option>
-</select>
 
 <!-- <div id="">
     <table class="">
@@ -127,18 +131,4 @@
     </table>
 </div> -->
 
-<form method="" action="">
-    <div class="">
-        <h2>Open a New Maintenance Ticket</h2>
-        <p></p>
-    </div>
-    <div class="">
-        <label class="description" for="desc">Description </label>
-        <div>
-            <input name="desc" [(ngModel)]="newTicketDesc">
-        </div>
-        <br /><br />
-        <button  (click)="sendTicket()" type="button">SUBMIT</button>
-    </div>
-</form>
 

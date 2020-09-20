@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
-import { Ticket } from 'ticket';
+import { Ticket } from '../ticket';
 import { MaintenanceService } from 'maintenance.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -13,11 +13,13 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class MaintenanceTComponent implements OnInit {
 
   tickets: Ticket[];
-  newTicketDesc: String;
   newTicketId: number;
   userId: number;
   loggedInUser;
-
+  model = {
+    description: ''
+    
+  };
 
 
   constructor(private ms: MaintenanceService, private authService: AuthService) {
@@ -38,12 +40,13 @@ export class MaintenanceTComponent implements OnInit {
 
   sendTicket() {
     
-    let t = new Ticket(0,this.newTicketDesc, null, null, this.authService.loggedInUser, null)
+    let t = new Ticket(0,this.model.description, null, null, this.authService.loggedInUser, null)
     console.log(t);
+    console.log(this.model.description)
     this.ms.addTicket(t).subscribe(
       (response: Ticket[]) => {
         this.tickets = response;
-        console.log(this.tickets)
+       
       }
     )
   }

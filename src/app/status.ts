@@ -1,4 +1,3 @@
-import { Ticket } from './ticket';
 
 export class Status {
     public statusId:number;
