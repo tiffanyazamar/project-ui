@@ -17,6 +17,10 @@ export class MaintenanceTComponent implements OnInit {
   newTicketId: number;
   userId: number;
   loggedInUser;
+  model = {
+    description: ''
+    
+  };
 
 
 
@@ -38,7 +42,7 @@ export class MaintenanceTComponent implements OnInit {
 
   sendTicket() {
     
-    let t = new Ticket(0,this.newTicketDesc, null, null, this.authService.loggedInUser, null)
+    let t = new Ticket(0,this.model.description, null, null, this.authService.loggedInUser, null)
     console.log(t);
     this.ms.addTicket(t).subscribe(
       (response: Ticket[]) => {
