@@ -20,6 +20,24 @@ export class MaintenanceTComponent implements OnInit {
     description: ''
     
   };
+  selected:any;
+
+    stat = [
+
+        { value: "Unresolved" },
+
+  
+        { value: "Resolved"}];
+
+    status = ['Select Status', 'Unresolved', 'Resolved'];
+
+
+
+        onOptionsSelected(event) {
+        let value = event.target.value;
+         console.log(this.selected);
+
+    }
 
 
   constructor(private ms: MaintenanceService, private authService: AuthService) {

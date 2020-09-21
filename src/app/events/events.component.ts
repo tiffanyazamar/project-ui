@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from 'app/services/event.service';
 import { AuthService } from 'app/auth.service';
 import { User } from 'app/models/user';
-import { Event } from '../models/event';
+import { Event } from 'app/models/event';
 
 // declare interface TableData {
 //     headerRow: string[];

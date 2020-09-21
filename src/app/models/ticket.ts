@@ -1,6 +1,6 @@
 
-import { User } from 'app/user';
-import { Status } from 'app/status';
+import { User } from './user';
+import { Status } from './status';
 
 export class Ticket {
     public ticketId:number;
