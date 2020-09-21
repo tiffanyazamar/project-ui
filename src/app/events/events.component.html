@@ -1,4 +1,4 @@
-<style>
+<!-- <style>
   tbody {
     color: white;
   }
@@ -6,9 +6,9 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card">
-      <div class="card-header">
+      <div class="card-header"> -->
         <h4 class="card-title">EVENTS</h4>
-      </div>
+      <!-- </div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table">
@@ -18,22 +18,30 @@
               <th>Creator</th>
               <th>Guest List</th>
               <th class="text-right">Date</th>
-            </thead>
+            </thead> -->
 
-            <tbody>
-              <tr *ngFor="let e of events">
-                <td>{{e.eventName}}</td>
-                <td>{{e.eventDescription}}</td>
-                <td>{{e.eventCreator.firstName}}</td>
-                <td>
+
+              <div class="container" >
+                <ul *ngFor="let e of events">
+                  <li>
+                    <div class="title">{{e.eventDate | date:'medium'}}</div>
+                    <h4>Name</h4>
+                <p>{{e.eventName}}</p>
+                <h4>Description</h4>
+                <p>{{e.eventDescription}}</p>
+                <h4>Creator</h4>
+                <p>{{e.eventCreator.firstName}}</p>
+                <h4>Guest List</h4>
+                <p>
                   <li *ngFor="let u of e.userList">
                     <ul>{{u.firstName}}</ul>
                   </li>
-                </td>
-                <td class="text-right">{{e.eventDate | date:'medium'}}</td>
-              </tr>
+                </p>
+                </li>
+                </ul>
+              </div>
               <!-- <button class="btn btn-primary" (click)="getEvents()">View All Events</button> -->
-            </tbody>
+
             <!-- <h3>Past Events</h3>
             <tbody>
               <tr *ngFor="let e of events">
@@ -48,12 +56,12 @@
                 <td class="text-right">{{e.eventDate | date:'medium'}}</td>
               </tr>
             </tbody> -->
-          </table>
+          <!-- </table>
         </div>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <form method="" action="" *ngIf="loggedInUser.userRole.role=='Landlord'">
   <div class="">
