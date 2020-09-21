@@ -1,4 +1,6 @@
-import { User } from './user';
+
+import { User } from 'app/user';
+import { Status } from 'app/status';
 
 export class Ticket {
     public ticketId:number;
@@ -6,12 +8,12 @@ export class Ticket {
     public submitted:any;
     public resolved:any;
     public author:User;
-    public statusId:number;
+    public statusId:Status;
 
-    constructor(ticketId:number, description:String, submitted:any, resolved:any, author:User, statusId:number) {
+    constructor(ticketId:number, description:String, submitted:any, resolved:any, author:User, statusId:Status) {
         this.ticketId = ticketId,
         this.description = description,
-        this.submitted = new Date(submitted).toLocaleString(),
+        this.submitted = submitted,
         this.resolved = resolved,
         this.author = author,
         this.statusId = statusId

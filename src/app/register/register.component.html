@@ -63,8 +63,11 @@
           name="phoneNumber"
         />
       </div>
-
-      <button class="btn btn-success" (click)="register()">Register</button>
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="customCheck1" name = "i-agree" [(ngModel)] = "iAgree">
+        <label class="custom-control-label" for="customCheck1">Check here to sign the lease electronically</label>
+      </div>
+      <button class="btn btn-success" [disabled] = "!iAgree" (click)="register()">Register</button>
     </div>
   </div>
 </div>

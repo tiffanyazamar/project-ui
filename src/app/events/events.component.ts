@@ -1,41 +1,125 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from 'app/services/event.service';
+import { AuthService } from 'app/auth.service';
+import { User } from 'app/models/user';
+import { Event } from '../models/event';
 
-declare interface TableData {
-    headerRow: string[];
-    dataRows: string[][];
-}
+// declare interface TableData {
+//     headerRow: string[];
+//     dataRows: string[][];
+// }
 
 @Component({
-    selector: 'events',
-    moduleId: module.id,
-    templateUrl: 'events.component.html'
+  selector: 'events',
+  moduleId: module.id,
+  templateUrl: 'events.component.html',
+  //styleUrls: ['./events.component.css']
 })
 
-export class EventsComponent implements OnInit{
-    public tableData1: TableData;
-    public tableData2: TableData;
-    ngOnInit(){
-        this.tableData1 = {
-            headerRow: [ 'ID', 'Name', 'Country', 'City', 'Salary'],
-            dataRows: [
-                ['1', 'Dakota Rice', 'Niger', 'Oud-Turnhout', '$36,738'],
-                ['2', 'Minerva Hooper', 'Curaçao', 'Sinaai-Waas', '$23,789'],
-                ['3', 'Sage Rodriguez', 'Netherlands', 'Baileux', '$56,142'],
-                ['4', 'Philip Chaney', 'Korea, South', 'Overland Park', '$38,735'],
-                ['5', 'Doris Greene', 'Malawi', 'Feldkirchen in Kärnten', '$63,542'],
-                ['6', 'Mason Porter', 'Chile', 'Gloucester', '$78,615']
-            ]
-        };
-        this.tableData2 = {
-            headerRow: [ 'ID', 'Name',  'Salary', 'Country', 'City' ],
-            dataRows: [
-                ['1', 'Dakota Rice','$36,738', 'Niger', 'Oud-Turnhout' ],
-                ['2', 'Minerva Hooper', '$23,789', 'Curaçao', 'Sinaai-Waas'],
-                ['3', 'Sage Rodriguez', '$56,142', 'Netherlands', 'Baileux' ],
-                ['4', 'Philip Chaney', '$38,735', 'Korea, South', 'Overland Park' ],
-                ['5', 'Doris Greene', '$63,542', 'Malawi', 'Feldkirchen in Kärnten', ],
-                ['6', 'Mason Porter', '$78,615', 'Chile', 'Gloucester' ]
-            ]
-        };
-    }
+export class EventsComponent implements OnInit {
+  // public tableData1: TableData;
+  // public tableData2: TableData;
+
+  loggedInUser: User;
+  events: Event[];
+  newEventName: String;
+  newEventDesc: String;
+  newEventDate: any;
+  guestList: User[] = [];
+  allUsers: User[];
+  newGuest: number;
+  currGuest: User;
+  upcomingEvents:Event[];
+  pastEvents:Event[];
+  today:Date;
+
+  // constructor(private es: EventService, private authservice: AuthService) {
+  //   this.loggedInUser = authservice.loggedInUser;
+  //   if (this.loggedInUser.userRole.role=='Lanlord') {this.getEvents()}
+  //   else {this.getEventsByGuest()}
+  //   this.today = new Date();
+  // }
+
+  ngOnInit() {
+  }
+
+  // getEvents() {
+  //   this.es.getAllEvents().subscribe(
+  //     (response: Event[]) => {
+  //       this.events = response;
+  //       console.log(this.events)
+  //       console.log(this.today);
+  //       // for (let ev of this.events) {
+  //       //   console.log(new Date(ev.eventDate));
+  //       //   if (new Date(ev.eventDate).getTime() < this.today.getTime()) {
+  //       //     this.upcomingEvents.push(ev);
+  //       //   } else {
+  //       //     this.pastEvents.push(ev);
+  //       //   }
+  //       // }
+  //     }
+  //   )
+
+  // }
+
+  // getEventsByGuest() {
+  //   this.es.getEventsByGuest(this.loggedInUser.userID).subscribe(
+  //     (response: Event[]) => {
+  //       this.events = response;
+  //       console.log(this.events)
+  //     }
+  //   )
+  //   // for (let ev of this.events) {
+  //   //   if (ev.eventDate.getTime() < new Date(this.today.getFullYear(), this.today.getMonth(), this.today.getDate()).getTime()) {
+  //   //     this.upcomingEvents.push(ev);
+  //   //   } else {
+  //   //     this.pastEvents.push(ev);
+  //   //   }
+  //   // }
+  // }
+
+  // getAllUsers() {
+  //   this.es.getAllUsers().subscribe(
+  //     (response: User[]) => {
+  //       this.allUsers = response;
+  //     }
+  //   )
+  // }
+
+  // addGuestByID() {
+  //   this.es.getUserByID(this.newGuest).subscribe(
+  //     (response: User) => {
+  //       this.guestList.push(response);
+  //       console.log(this.guestList);
+  //     }
+  //   )
+  //   this.newGuest=null;
+  // }
+
+  // // showAllUsersFunc() {
+  // //   if (this.showAllUsers == false) {
+  // //     this.showAllUsers = true;
+  // //   } else {
+  // //     this.showAllUsers = false
+  // //   }  
+  // // }
+
+  // sendEvent() {
+  //   let e = new Event(0, this.newEventName, this.newEventDesc, this.newEventDate, this.authservice.loggedInUser, this.guestList)
+  //   console.log(e);
+  //   this.es.addEvent(e).subscribe(
+  //     (response: Event[]) => {
+  //       this.events = response;
+  //       console.log(this.events)
+  //     }
+  //   )
+  //   this.newEventName=null;
+  //   this.newEventDesc=null;
+  //   this.newEventDate=null;
+  //   this.guestList=null;
+  // }
+
+
+
+
 }

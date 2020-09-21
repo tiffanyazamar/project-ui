@@ -9,7 +9,7 @@ import { AuthService } from 'app/auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  iAgree = false;
   model: {
     username: string,
     password: string,
