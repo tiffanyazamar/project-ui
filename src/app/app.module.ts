@@ -23,6 +23,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
+import { LeaseComponent } from './lease/lease.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { RegisterComponent } from './register/register.component';
     DashboardComponent,
     UserComponent,
     EventsComponent,
+    LeaseComponent
   ],
   imports: [
     BrowserAnimationsModule,
