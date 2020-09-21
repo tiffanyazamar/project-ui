@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MaintenanceTComponent } from './maintenance-t/maintenance-t.component';
+import { LeaseComponent } from './lease/lease.component';
 
 export const AppRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -16,7 +17,8 @@ export const AppRoutes: Routes = [
   { path: 'events', component: EventsComponent },
   { path: 'user', component: UserComponent },
   { path: 'tickets', component: MaintenanceTComponent },
- 
+  { path: 'lease', component: LeaseComponent },
+
   {
     path: '**',
     redirectTo: 'home'
