@@ -7,6 +7,11 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
+                <select class = "form-control" style = "width:150px; margin-bottom: 10px;" name = "filter" [(ngModel)] = "status" (change) = "filter()">
+                  <option value = "all" selected>All</option>
+                  <option value = "signed">Signed</option>
+                  <option value = "notSigned">Not Yet Signed</option>
+                </select>
                 <table class="table">
                   <thead class=" text-primary">
                     <th></th>

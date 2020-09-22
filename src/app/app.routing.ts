@@ -10,8 +10,12 @@ import { MaintenanceTComponent } from './maintenance-t/maintenance-t.component';
 import { LeaseComponent } from './lease/lease.component';
 
 export const AppRoutes: Routes = [
+  {
+    path: '*',
+    redirectTo: 'ourTeam'
+  },
   { path: 'dashboard', component: DashboardComponent },
-  {path:'home', component:HomeComponent},
+  {path:'ourTeam', component:HomeComponent},
   {path:'login', component:LoginComponent},
   {path: 'register', component:RegisterComponent},
   { path: 'events', component: EventsComponent },

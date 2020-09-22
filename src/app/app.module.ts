@@ -24,12 +24,9 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { LeaseComponent } from './lease/lease.component';
-<<<<<<< HEAD
 import { WeatherComponent } from './weather/weather.component';
-=======
 import { MaintenanceTComponent } from './maintenance-t/maintenance-t.component';
 
->>>>>>> ecb7044135b46a2980ec62b69f2edf06cf8872a7
 
 
 @NgModule({
@@ -43,11 +40,8 @@ import { MaintenanceTComponent } from './maintenance-t/maintenance-t.component';
     UserComponent,
     EventsComponent,
     LeaseComponent,
-<<<<<<< HEAD
     WeatherComponent,
-=======
     MaintenanceTComponent
->>>>>>> ecb7044135b46a2980ec62b69f2edf06cf8872a7
   ],
   imports: [
     BrowserAnimationsModule,

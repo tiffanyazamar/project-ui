@@ -9,9 +9,9 @@ export class LeaseService {
     return  this.http
     .post<any>('http://localhost:8080/chatelaine/lease/update', model);
   }
-  getAllLeases() {
+  getAllLeases(status:string) {
     return  this.http
-    .get<any>('http://localhost:8080/chatelaine/lease/allLeases');
+    .get<any>('http://localhost:8080/chatelaine/lease/allLeases/' + status);
     }
 
   constructor(private http: HttpClient) { }

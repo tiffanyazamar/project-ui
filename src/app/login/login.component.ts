@@ -27,7 +27,7 @@ export class LoginComponent {
       .subscribe(result => {
         this.authService.loggedInUser = result;
         console.log(result)
-        this.router.navigate(['home']);
+        this.router.navigate(['dashboard']);
         console.log(this.model)
       });
   }

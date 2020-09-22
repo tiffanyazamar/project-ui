@@ -21,6 +21,7 @@
         </div>
         <div class="col-5 col-md-7 row">
             <span *ngFor= "let daily of dailies | slice:1:dailies.length-3" class = "daily">
+                {{daily.dt * 1000 | date:'EEEE'}}
                 <div class = "row">
                     <div>
                         <img width = "50px" height = "50px" src= "http://openweathermap.org/img/wn/{{daily.weather[0].icon}}@2x.png"/>

@@ -10,7 +10,7 @@
       Chatelaine
     </a>
   </div>
-    <ul class="nav">
+    <ul class="nav" *ngIf = "loggedIn">
         <li *ngFor="let menuItem of menuItems" routerLinkActive="active" class="{{menuItem.class}}">
             <a [routerLink]="[menuItem.path]">
                 <i class="nc-icon {{menuItem.icon}}"></i>
@@ -18,4 +18,21 @@
             </a>
         </li>
     </ul>
+    <ul class="nav" *ngIf = "!loggedIn">
+      <li  routerLinkActive="active">
+          <a [routerLink]="['home']">
+            <i class="fas fa-users"></i>              <p>Our Team</p>
+          </a>
+      </li>
+      <li>
+        <a [routerLink] = "['login']">
+          <i class="fas fa-sign-in-alt"></i>                 <p>Login</p>
+        </a>
+      </li>
+      <li>
+        <a [routerLink] = "['register']">
+          <i class="fas fa-user-plus"></i>                <p>Register</p>
+        </a>
+      </li>
+  </ul>
 </div>
