@@ -1,87 +1,122 @@
-<style>
-  tbody {
-    color: white;
-  }
-</style>
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">EVENTS</h4>
-      </div>
-      <div class="card-body">
-        <div class="table-responsive">
-          <table class="table">
-            <thead class=" text-primary">
-              <th>Name</th>
-              <th>Description</th>
-              <th>Creator</th>
-              <th>Guest List</th>
-              <th class="text-right">Date</th>
-            </thead>
 
-            <tbody>
-              <tr *ngFor="let e of events">
-                <td>{{e.eventName}}</td>
-                <td>{{e.eventDescription}}</td>
-                <td>{{e.eventCreator.firstName}}</td>
-                <td>
-                  <li *ngFor="let u of e.userList">
-                    <ul>{{u.firstName}}</ul>
-                  </li>
-                </td>
-                <td class="text-right">{{e.eventDate | date:'medium'}}</td>
-              </tr>
-              <!-- <button class="btn btn-primary" (click)="getEvents()">View All Events</button> -->
-            </tbody>
-            <!-- <h3>Past Events</h3>
-            <tbody>
-              <tr *ngFor="let e of events">
-                <td>{{e.eventName}}</td>
-                <td>{{e.eventDescription}}</td>
-                <td>{{e.eventCreator.firstName}}</td>
-                <td>
-                  <li *ngFor="let u of e.userList">
-                    <ul>{{u.firstName}}</ul>
-                  </li>
-                </td>
-                <td class="text-right">{{e.eventDate | date:'medium'}}</td>
-              </tr>
-            </tbody> -->
-          </table>
+
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css"> -->
+<!-- <div style = "text-align: center;"><h1>Events</h1></div> -->
+<select id="inputState" class="form-control" (change)="toggleEvents($event.target.value)">
+  <option value=1>Upcoming Events</option>
+  <option value=2>Past Events</option>
+</select>
+
+
+<div *ngIf="hideUpcoming==false">
+<div class="container-fluid my-5 justify-content-center" *ngFor="let e of upcomingEvents" >
+    <div class=" row justify-content-center ">
+        <div class="col-lg-4 col-12 mt-5 ">
+            <div class="card mt-3 ">
+                <div class="card-header text-center border-0 ">
+                    <div class="row justify-content-center ">
+                    </div>
+                    <div class="row text-center name">
+                        <div class="col">
+                            <h4>{{e.eventDate | date:'medium'}}</h4>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body pt-0 text-center pb-3 ">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 col">
+                          <h5>{{e.eventName}}</h5>
+                            <p class="bold">Description: {{e.eventDescription}}</p>
+                            <p class="bold">Host: {{e.eventCreator.firstName}} {{e.eventCreator.lastName}}</p>
+                            <br>
+                            <p class="bold">Guest List:</p>
+                            <span class="bold" *ngFor="let u of e.userList">
+                              <span>&diams; {{u.firstName}} {{u.lastName}} &diams; </span>
+                            </span>
+                            <p class="bold"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div *ngIf="hideUpcoming">
+<div class="container-fluid my-5 justify-content-center" *ngFor="let e of pastEvents">
+  <div class=" row justify-content-center ">
+      <div class="col-lg-4 col-12 mt-5 ">
+          <div class="card mt-3 ">
+              <div class="card-header text-center border-0 ">
+                  <div class="row justify-content-center ">
+                  </div>
+                  <div class="row text-center name">
+                      <div class="col">
+                          <h4 class="mb-0 profile-pic">{{e.eventDate | date:'medium'}}</h4>
+                          <p></p>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-body pt-0 text-center pb-3 ">
+                  <div class="row justify-content-center">
+                      <div class="col-md-8 col">
+                          <h5>{{e.eventName}}</h5>
+                          <p class="bold">Description: {{e.eventDescription}}</p>
+                          <p class="bold">Host: {{e.eventCreator.firstName}} {{e.eventCreator.lastName}}</p>
+                          <br>
+                          <p class="bold">Guest List:</p>
+                          <span class="bold" *ngFor="let u of e.userList">
+                            <span>&diams; {{u.firstName}} {{u.lastName}} &diams; </span>
+                          </span>
+                          <p class="bold"></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+
+<br>
+<br>
+<br>
+<div background-color="white" opacity="0.5" width="50%">
+<form *ngIf="loggedInUser.userRole.role=='Landlord'" >
+  <h2>New Event</h2>
+  <label class="" for="name">Name of Event </label>
+  <input class="form-control" name="name" type="text" [(ngModel)]="newEventName">
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Event Description</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="newEventDesc"></textarea>
+  </div>
+  <label class="" for="date">Event Date and Time</label>
+  <input class="form-control" name="date" type="datetime-local" [(ngModel)]="newEventDate">
+  <br>
+  <div>
+    <div class="float-container">
+      <div class="float-child">
+        <div style = "text-align: center; text-decoration: underline;"><h4>Guest List</h4></div>
+        <div *ngFor="let u of invited">
+          <p class="person" (click)="deleteGuest(u)">{{u.firstName}} {{u.lastName}}</p>
+        </div>
+      </div>
+      <div class="float-child">
+        <div style = "text-align: center;"><h4 style></h4></div>
+        <div *ngFor="let u of uninvited">
+          <p class="person" (click)="addGuest(u)">{{u.firstName}} {{u.lastName}}</p>
         </div>
       </div>
     </div>
+    <!-- <button (click)="addGuestByID()" type="button" class="btn btn-secondary">Add Guest(s)</button> -->
+      <!-- <ul *ngFor="let u of guestList">
+        <li>ID: {{u.userID}}  {{u.firstName}} {{u.lastName}}</li>
+      </ul> -->
   </div>
+  <br /><br />
+  <button (click)="sendEvent()" type="submit" class="btn btn-primary">Create Event</button>
+</form>
 </div>
 
-<form method="" action="" *ngIf="loggedInUser.userRole.role=='Landlord'">
-  <div class="">
-    <h2>Create New Event</h2>
-    <p></p>
-  </div>
-  <div class="">
-    <label class="" for="name">Name of Event </label>
-    <div>
-      <input name="name" [(ngModel)]="newEventName">
-    </div>
-    <label class="" for="desc">Description </label>
-    <div>
-      <textarea name="desc" rows="3" cols="50" [(ngModel)]="newEventDesc"></textarea>
-    </div>
-    <label class="" for="date">Date </label>
-    <div>
-      <input name="date" type="datetime-local" [(ngModel)]="newEventDate">
-    </div>
-    <label class="" for="guest">Guest List </label>
-    <div>
-      <input name="guest" id="guestId" type="text" placeholder="Enter Guest ID" [(ngModel)]="newGuest">
-      <button (click)="addGuestByID()" type="button">Add Guest</button>
-        <li *ngFor="let u of guestList">
-          <ol>ID: {{u.userID}}  {{u.firstName}} {{u.lastName}}</ol>
-        </li>
-    </div>
-    <br /><br />
-    <button (click)="sendEvent()" type="submit">SUBMIT</button>
-  </div>
-</form>

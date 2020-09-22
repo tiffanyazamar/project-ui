@@ -26,6 +26,7 @@ export class LoginComponent {
       .post<any>(`http://localhost:8080/chatelaine/user/login`, this.model)
       .subscribe(result => {
         this.authService.loggedInUser = result;
+        console.log(result)
         this.router.navigate(['home']);
         console.log(this.model)
       });
