@@ -23,9 +23,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MaintenanceTComponent } from './maintenance-t/maintenance-t.component'
-
+import { LeaseComponent } from './lease/lease.component';
 
 
 @NgModule({
@@ -38,7 +36,7 @@ import { MaintenanceTComponent } from './maintenance-t/maintenance-t.component'
     DashboardComponent,
     UserComponent,
     EventsComponent,
-    MaintenanceTComponent
+    LeaseComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -54,7 +52,6 @@ import { MaintenanceTComponent } from './maintenance-t/maintenance-t.component'
     HttpClientModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule
   ],
   providers: [AuthService,
     HttpClient],

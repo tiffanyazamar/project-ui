@@ -19,11 +19,21 @@
           class="form-control"
           id="password"
           required
-          [(ngModel)]="model.username"
+          [(ngModel)]="model.password"
           name="password"
         />
       </div>
-
+      <div class="form-group">
+        <label for="confirm-password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          required
+          [(ngModel)]="confirmPassword"
+          name="confirm-password"
+        />
+      </div>
       <div class="form-group">
         <label for="firstName">First Name</label>
         <input
@@ -53,8 +63,11 @@
           name="phoneNumber"
         />
       </div>
-
-      <button class="btn btn-success" (click)="register()">Register</button>
+      <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="customCheck1" name = "i-agree" [(ngModel)] = "iAgree">
+        <label class="custom-control-label" for="customCheck1">Check here to sign the lease electronically</label>
+      </div>
+      <button class="btn btn-success" [disabled] = "!iAgree" (click)="register()">Register</button>
     </div>
   </div>
 </div>

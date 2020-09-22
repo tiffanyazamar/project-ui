@@ -1,48 +1,128 @@
-.container {
-  width:90%;
-  overflow:hidden;
-  background: pink;
-  margin: 20px auto;
-  padding: 20px 0px;
+.float-container {
+  display: flex;
+  height : 500px;
 }
 
-.container ul{
-  padding:0px;
-  margin:0px;
+.float-child {
+  flex:1;
+  background-color: #eee;
+  opacity: 0.6;
+  padding: 20px;
+  text-align: center;
+} 
+
+.float-child:first-child {
+  margin-right: 20px;
 }
 
-.container ul li{
-  list-style:none;
-  float:left;
-  width:20%;
-  height:300px;
-  background:white;
-  margin:40px 30px 0px 40px;
-  box-sizing: border-box;
-  border:2px solid black;
+.person:hover {
+  background-color: rgb(240, 240, 178);
 }
 
-.container ul li:hover{
-  opacity: 0.9;
+
+
+
+
+
+body {
+  min-height: 100vh;
+  background-color: #eee;
+  background-size: cover;
+  font-family: 'Cormorant', serif;
+  color: rgb(112, 123, 240);
+  background: linear-gradient(140deg, #fff, 50%, #74a0ff);
+  background-repeat: no-repeat
 }
 
-.container ul li .title{
-  width:100%;
-  height:50px;
-  line-height:50px;
-  background:white;
-  text-align:center;
+.container-fluid {
+  margin-top: 80px !important
 }
 
-@media screen and (max-width:750px) {
-  .container{
-    width:100%;
-    padding:0px;
+p {
+  font-size: 17px;
+  margin-bottom: 7px
+}
+
+.small {
+  letter-spacing: 0.5px !important
+}
+
+.card-header img {
+  border: 5px solid white !important
+}
+
+.outside {
+  position: inherit;
+  top: -50%
+}
+
+.card {
+  border-radius: 20px !important;
+  box-shadow: 2px 2px 5px 0px rgb(255, 255, 255);
+  transition: 0.8s;
+  background-color: #00000036;
+  color:white;
+}
+
+.card-header {
+  border-radius: 20px !important;
+}
+
+.card-footer {
+  border-radius: 20px !important;
+}
+
+hr {
+  background-color: white;
+  border: 1px solid;
+  border-radius: 20px;
+  color: white;
+  height: 5px;
+  width: 70px !important
+}
+
+.bold {
+  font-weight: 500
+}
+
+.profile-pic {
+  margin-bottom: -5px !important
+}
+
+.quotes {
+  position: relative;
+  top: -10px
+}
+
+.quotes-down {
+  position: relative;
+  top: -4 px
+}
+
+.fa {
+  color: rgb(174, 178, 219);
+  cursor: pointer
+}
+
+.card-footer .fa {
+  font-size: 20px !important
+}
+
+.name {
+  margin-top: -50px !important
+}
+
+.container-fluid:hover .card:not(:hover) {
+  transform: scale(0.9)
+}
+
+@media (max-width: 1000px) {
+  .container-fluid:hover .card:not(:hover) {
+      transform: scale(1)
   }
-
-  .container ul li {
-    float:none;
-    width:90%;
-    margin:40px auto;
-  }
 }
+
+
+
+
+

@@ -7,7 +7,9 @@ import { AuthService } from 'app/auth.service';
 @Component({
     moduleId: module.id,
     selector: 'navbar-cmp',
-    templateUrl: 'navbar.component.html'
+    templateUrl: 'navbar.component.html',
+    styleUrls: ['./navbar.component.css']
+
 })
 
 export class NavbarComponent implements OnInit{
@@ -19,13 +21,13 @@ export class NavbarComponent implements OnInit{
 
     public isCollapsed = true;
     @ViewChild("navbar-cmp", {static: false}) button;
-  displayName: any;
+    loggedInUser: any;
 
     constructor(location:Location, private renderer : Renderer2, private element : ElementRef, authService: AuthService, private router: Router) {
         this.location = location;
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
-        this.displayName = authService.loggedInUser.firstName + " " + authService.loggedInUser.lastName;
+        this.loggedInUser = authService.loggedInUser;
     }
 
     ngOnInit(){

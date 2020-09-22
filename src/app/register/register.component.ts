@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AuthService } from 'app/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -6,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  iAgree = false;
   model: {
     username: string,
     password: string,
@@ -14,8 +17,12 @@ export class RegisterComponent implements OnInit {
     lastName: string,
     phoneNumber: string
   }
-  constructor() {
-  this.model = {
+  confirmPassword;
+  errorMessage: string;
+  constructor(private http: HttpClient,
+    private router:Router,
+    private authService: AuthService
+) {  this.model = {
     username: '',
     password: '',
     firstName: '',
@@ -26,9 +33,19 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
   }
 
   register() {
-
+    if(this.model.password.length>0 && this.model.password!==this.confirmPassword){
+      this.errorMessage = "Password does match!";
+    }else{
+      this.http
+      .post<any>(`http://localhost:8080/chatelaine/user/register`, this.model)
+      .subscribe(result => {
+        this.authService.loggedInUser = result;
+        this.router.navigate(['dashboard']);
+      });
+    }
   }
 }
