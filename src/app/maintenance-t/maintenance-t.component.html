@@ -1,6 +1,8 @@
 <style>
 tbody {
-  color:white;
+  font-weight: 500;
+    color: white;
+    
 }
 </style>
 
@@ -17,7 +19,7 @@ tbody {
         <option *ngFor="let sta of status" [ngValue]="sta">{{sta}}</option>
     </select>
         <div class="table-responsive">
-          <table class="table" id="myTable">
+          <table class="table">
             <thead class=" text-primary">
               <th>
                   ID
@@ -39,7 +41,7 @@ tbody {
               </th>
             </thead>
             
-            <tbody *ngIf="loggedInUser.userRole.role == 'Tenant'">
+            <tbody *ngIf="loggedInUser.userRole.role=='Landlord'">
               <tr *ngFor="let t of tickets" >
                 <td>
                   {{t.ticketId}}
@@ -62,14 +64,13 @@ tbody {
               </tr>
               <button class="btn btn-primary" (click)="getTickets()">View All Tickets</button>
           </tbody>
-         
-              <!-- <tbody *ngIf="loggedInUser.userRole.role=='Tenant'">
-              <tr *ngFor="let t of loggedInUser.tickets">
+               <tbody *ngIf="loggedInUser.userRole.role=='Tenant'">
+              <tr *ngFor="let t of tickets">
                 <td>
                   {{t.ticketId}}
                 </td>
                 <td>
-                  {{loggedInUser.firstName}} {{loggedInUser.lastName}}
+                  {{t.author.firstName}} {{t.author.lastName}}
                 </td>
                 <td>
                   {{t.description}}
@@ -86,7 +87,7 @@ tbody {
               </tr>
               <button class="btn btn-primary" (click)="getTickets()">View All Tickets</button>
           </tbody>
-   -->
+  
           </table>
           <br>
     </div>
@@ -100,7 +101,7 @@ tbody {
     <br>
     <h4>Open a New Maintenance Ticket</h4>
   <div class="form-group">
-    <label for="description">Description</label>
+    <label for="description"><h5>Description </h5></label>
     <input type="text" class="form-control" [(ngModel)]="model.description" id="description" />
   </div>
   <button class="btn btn-primary" (click)="sendTicket()">Submit</button>
