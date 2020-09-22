@@ -36,8 +36,11 @@ tbody {
               <th>
                   Resolved Time
               </th>
+              <th>
+                Status
+            </th>
               <th class="text-right">
-                  Status
+                  Resolve
               </th>
             </thead>
             
@@ -61,10 +64,12 @@ tbody {
                 <td class="text-right">
                   {{t.statusId.status}}
                 </td>
+                <td><button *ngIf = "t.statusId.status == 'Unresolved'" class = "btn btn-rpimary" (click) = "landlordResolve(t.ticketId)">Resolve</button>
+                </td>
               </tr>
               <button class="btn btn-primary" (click)="getTickets()">View All Tickets</button>
           </tbody>
-               <tbody *ngIf="loggedInUser.userRole.role=='Tenant'">
+               <tbody *ngIf="loggedInUser.userRole.role =='Tenant'">
               <tr *ngFor="let t of tickets">
                 <td>
                   {{t.ticketId}}
@@ -84,8 +89,10 @@ tbody {
                 <td class="text-right">
                   {{t.statusId.status}}
                 </td>
+                <td><button *ngIf = "t.statusId.status == 'Unresolved'" class = "btn btn-rpimary" (click) = "resolve(t.ticketId)">Resolve</button>
+                </td>
               </tr>
-              <button class="btn btn-primary" (click)="getTickets()">View All Tickets</button>
+              <button class="btn btn-primary" (click)=" getAllTicketsByAuthor()">View All Tickets</button>
           </tbody>
   
           </table>
