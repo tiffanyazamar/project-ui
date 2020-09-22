@@ -1,0 +1,51 @@
+<div class="card card-stats" *ngIf = "current">
+    <div class="card-body ">
+      <div class="row">
+        <div class="col-2 col-md-2">
+            Today Weather at {{current.dt*1000 | date: 'MM/dd/yy hh:mm:ss'}}
+          <div class="icon-big text-center icon-warning">
+            <img width = "150px" height = "150px" src= "http://openweathermap.org/img/wn/{{current.weather[0].icon}}@2x.png"/>
+            {{current.weather[0].main}}
+        </div>
+        </div>
+        <div class="col-5 col-md-3">
+            <div class = "temp">{{current.temp | number: '1.0-0'}}<i class="degree far fa-circle"></i> F
+            </div>
+            <div>
+                <p>Feel Like : {{current.feels_like | number: '1.0-0'}}<i class="small-degree far fa-circle"></i> F</p>
+                <p>Humidity : {{current.humidity}}%</p>
+                <p>Wind : {{current.wind_speed}} m/h</p>
+                <p>Sun Rise : {{current.sunrise*1000 | date:'mediumTime'}}</p>
+                <p>Sun Set : {{current.sunset*1000 | date:'mediumTime'}}</p>
+            </div>
+        </div>
+        <div class="col-5 col-md-7 row">
+            <span *ngFor= "let daily of dailies | slice:1:dailies.length-3" class = "daily">
+                {{daily.dt * 1000 | date:'EEEE'}}
+                <div class = "row">
+                    <div>
+                        <img width = "50px" height = "50px" src= "http://openweathermap.org/img/wn/{{daily.weather[0].icon}}@2x.png"/>
+                    </div>
+                    <div style = "align-self: center;">
+                        <p style = "margin: 0 0 0 0">{{daily.temp.min | number: '1.0-0'}}<i class="small-degree far fa-circle"></i> F</p>
+                        <p style = "margin: 0 0 0 0"> {{daily.temp.max | number: '1.0-0'}}<i class="small-degree far fa-circle"></i> F</p>
+                    </div>
+                </div>
+                <p>Morning: {{daily.temp.morn | number: '1.0-0'}}<i class="small-degree far fa-circle"></i> F</p>
+                <p>Day: {{daily.temp.day | number: '1.0-0'}}<i class="small-degree far fa-circle"></i> F</p>
+                <p>Evening: {{daily.temp.eve | number: '1.0-0'}}<i class="small-degree far fa-circle"></i> F</p>
+                    <p>Humidity : {{daily.humidity}}%</p>
+                    <p>Wind : {{daily.wind_speed}} m/h</p>
+                    <p>Sun Rise : {{daily.sunrise*1000 | date:'mediumTime'}}</p>
+                    <p>Sun Set : {{daily.sunset*1000 | date:'mediumTime'}}</p>
+            </span>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer ">
+      <hr>
+      <div class="stats">
+       <a style = "cursor: pointer;" (click) = "getWeather()"> <i class="fa fa-refresh"></i> Refresh Temperature</a>
+      </div>
+    </div>
+  </div>

@@ -24,6 +24,9 @@ import { FormsModule } from '@angular/forms';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { RegisterComponent } from './register/register.component';
 import { LeaseComponent } from './lease/lease.component';
+import { WeatherComponent } from './weather/weather.component';
+import { MaintenanceTComponent } from './maintenance-t/maintenance-t.component';
+
 
 
 @NgModule({
@@ -36,7 +39,9 @@ import { LeaseComponent } from './lease/lease.component';
     DashboardComponent,
     UserComponent,
     EventsComponent,
-    LeaseComponent
+    LeaseComponent,
+    WeatherComponent,
+    MaintenanceTComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -10,6 +10,7 @@ import { Router, Event, NavigationEnd } from '@angular/router';
 
 
 export class AppComponent {
+
   title = 'chatelaine';
   loggedInUser;
   constructor(authService: AuthService, router: Router) {
@@ -18,14 +19,16 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         if (authService.loggedInUser == undefined) {
 
-          if (event.url !== '/' && event.url !== '/login' && event.url !== '/register') {
+          if (event.url !== '/' && event.url !== '/ourTeam' && event.url !== '/login' && event.url !== '/register') {
             router.navigate(['login']);
           }
         }else{
           this.loggedInUser = authService.loggedInUser;
+          
         }
       }
     });
 
   }
+
 }

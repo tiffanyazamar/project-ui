@@ -15,6 +15,7 @@ export class LeaseComponent implements OnInit {
   loggedInUser;
   leaseDetail: any;
   leases: any;
+  status  = 'all';
   constructor(private http: HttpClient,
     private router: Router,
     private authService: AuthService,
@@ -24,10 +25,13 @@ export class LeaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getLease();
+    this.getLease('all');
+  }
+  filter(){
+    this.getLease(this.status);
   }
 
-  getLease(){
+  getLease(status){
     if (this.loggedInUser.userRole.role === 'Tenant') {
       this.isLandlord = false;
       this.leaseService.getLeaseForTenant(this.loggedInUser.userID).subscribe(result => {
@@ -35,7 +39,7 @@ export class LeaseComponent implements OnInit {
       });
     } else {
       this.isLandlord = true;
-      this.leaseService.getAllLeases().subscribe(result => {
+      this.leaseService.getAllLeases(status).subscribe(result => {
         this.leases = result;
       });
     }
@@ -47,7 +51,7 @@ export class LeaseComponent implements OnInit {
     }
     this.leaseService.sign(model).subscribe(result => {
       if(result){
-        this.getLease();
+        this.getLease(this.status);
       }
     });
   }
@@ -58,7 +62,7 @@ export class LeaseComponent implements OnInit {
     }
     this.leaseService.sign(model).subscribe(result => {
       if(result){
-        this.getLease();
+        this.getLease(this.status);
       }
     });
   }

@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-<div class="wrapper" >
-    <div class="sidebar" data-color="white" data-active-color="danger" *ngIf = "loggedInUser">
-        <sidebar-cmp></sidebar-cmp>
+<div class="wrapper">
+    <div class="sidebar" data-color="white" data-active-color="danger">
+        <sidebar-cmp [loggedInUser] = "loggedInUser"></sidebar-cmp>
     </div>
     <div class="main-panel">
         <navbar-cmp *ngIf = "loggedInUser"></navbar-cmp>
@@ -11,6 +11,9 @@
         </div>
         <footer-cmp></footer-cmp>
     </div>
+    <fixedplugin-cmp></fixedplugin-cmp>
+
 </div>
 
-<fixedplugin-cmp></fixedplugin-cmp>
+
+

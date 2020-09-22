@@ -56,6 +56,28 @@ export class MaintenanceTComponent implements OnInit {
       }
     )
   }
+  getAllTicketsByAuthor() {
+    console.log(this.loggedInUser.userID)
+    this.ms.getAllTicketsByAuthor(this.loggedInUser.userID).subscribe(
+      (response: Ticket[]) => {
+        this.tickets = response;
+        console.log(this.tickets)
+        console.log(this.loggedInUser.userRole.role)
+      }
+    )
+  }
+  
+  resolve(ticketId){
+      const model = {
+        ticketId: ticketId
+      }
+      this.ms.resolve(model).subscribe(result => {
+        if(result){
+          this.getAllTicketsByAuthor() ;
+        }
+      });
+    }
+  
 
   sendTicket() {
     
@@ -70,19 +92,7 @@ export class MaintenanceTComponent implements OnInit {
     )
   }
 
-  // sendTicket() {
-  //   this.ms.getTicket(this.newTicketId).pipe(
-  //     switchMap( (ticket:any) => this.ms.getUser(this.userId).pipe(
-  //       map( (u: User) => ({u, ticket}))
-  //     ))
-  //   ).pipe(
-  //     switchMap( ({u, ticket}) => this.ms.addTicket(new Ticket(0, this.newTicketDesc, Date.now(), null, u, this.statusId)).pipe(
-  //       map( allUsers => ({u, ticket, allUsers}))
-  //     ))
-  //   ).subscribe( ({u, ticket, allUsers})) => {
-  //     this.users = allUsers;
-  //   }
-  // }
+
 
 
 

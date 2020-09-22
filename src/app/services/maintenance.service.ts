@@ -20,8 +20,11 @@ export class MaintenanceService {
   getAllTickets() {
     return this.http.get<Ticket[]>('http://localhost:8080/chatelaine/ticket');
   }
+  getAllTicketsByAuthor(userID:number) {
+    return this.http.get<Ticket[]>('http://localhost:8080/chatelaine/ticket/'+userID);
+  }
 
-  getTicketsByStatus(sId:number){
+  getTicketsByStatus(sId:string){
     return this.http.get<Ticket[]>('http://localhost:8080/chatelaine/ticket/'+sId);
   }
 
@@ -32,6 +35,11 @@ export class MaintenanceService {
   addTicket(t:Ticket): Observable<Ticket[]> {
     console.log(t);
     return this.http.post<Ticket[]>('http://localhost:8080/chatelaine/ticket', t, this.httpOptions);
+  }
+
+  resolve(model: any) {
+    return  this.http
+    .post<any>('http://localhost:8080/chatelaine/ticket/update', model);
   }
 
   getUser(id:number) {
