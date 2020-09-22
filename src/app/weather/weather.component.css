@@ -1,0 +1,17 @@
+.degree{
+    font-size: 25px;
+    vertical-align: super;
+}
+
+.temp{
+    font-size: 70px;
+}
+.small-degree{
+    font-size: 5px;
+    vertical-align: super;
+}
+
+.daily{
+    font-size: 12px;
+    min-width: 25%;
+}
