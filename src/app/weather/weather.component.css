@@ -10,7 +10,9 @@
     font-size: 5px;
     vertical-align: super;
 }
-
+.icon-big{
+    font-size: 22px;
+}
 .daily{
     font-size: 12px;
     min-width: 25%;
