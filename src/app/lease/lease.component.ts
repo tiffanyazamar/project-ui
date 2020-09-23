@@ -51,9 +51,13 @@ export class LeaseComponent implements OnInit {
       this.isLandlord = true;
       this.leaseService.getAllLeases(status).subscribe(result => {
         this.leases = result;
+<<<<<<< HEAD
         // for (let lf of this.leases.leaseFile) {
         //   this.retrievedImage.push('data:image/jpeg;base64,' + lf.picByte)
         // }
+=======
+        console.log(status)
+>>>>>>> e29f42f54a08eb78c8a6b036a8430ea8aa2bc80b
       });
     }
   }

@@ -15,9 +15,11 @@ tbody {
       </div>
       <div class="card-body">
       </div>
-      <select [(ngModel)]="selected" name="status" placeholder="select" (ngModelChange)="onOptionsSelected($event)">
-        <option *ngFor="let sta of status" [ngValue]="sta">{{sta}}</option>
-    </select>
+      <select class = "form-control" style = "width:150px; margin-bottom: 10px;" name = "filter" [(ngModel)] = "status" (change) = "filter()">
+        <option value = "all" selected>All</option>
+        <option value = "resolved">Resolved</option>
+        <option value = "unresolved">Unresolved</option>
+      </select>
         <div class="table-responsive">
           <table class="table">
             <thead class=" text-primary">
@@ -40,7 +42,7 @@ tbody {
                 Status
             </th>
               <th class="text-right">
-                  Resolve
+                  
               </th>
             </thead>
             
@@ -64,7 +66,7 @@ tbody {
                 <td class="text-right">
                   {{t.statusId.status}}
                 </td>
-                <td><button *ngIf = "t.statusId.status == 'Unresolved'" class = "btn btn-rpimary" (click) = "landlordResolve(t.ticketId)">Resolve</button>
+                <td><button *ngIf = "t.statusId.status == 'Unresolved'" class = "btn btn-rpimary" (click) = "resolve(t.ticketId)">Resolve</button>
                 </td>
               </tr>
               <button class="btn btn-primary" (click)="getTickets()">View All Tickets</button>
@@ -89,8 +91,7 @@ tbody {
                 <td class="text-right">
                   {{t.statusId.status}}
                 </td>
-                <td><button *ngIf = "t.statusId.status == 'Unresolved'" class = "btn btn-rpimary" (click) = "resolve(t.ticketId)">Resolve</button>
-                </td>
+                
               </tr>
               <button class="btn btn-primary" (click)=" getAllTicketsByAuthor()">View All Tickets</button>
           </tbody>
