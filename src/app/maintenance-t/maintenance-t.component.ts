@@ -13,31 +13,21 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class MaintenanceTComponent implements OnInit {
 
   tickets: Ticket[];
+  tickets2:Ticket[];
+  unresolved:Ticket[] = [];
+  resolved:Ticket[] = [];
   newTicketId: number;
   userId: number;
+  isLandlord: boolean;
   loggedInUser;
+  status  = 'all';
+
   model = {
     description: ''
     
   };
-  selected:any;
-
-    stat = [
-
-        { value: "Unresolved" },
-
-  
-        { value: "Resolved"}];
-
-    status = ['Select Status', 'Unresolved', 'Resolved'];
 
 
-
-        onOptionsSelected(event) {
-        let value = event.target.value;
-         console.log(this.selected);
-
-    }
 
 
   constructor(private ms: MaintenanceService, private authService: AuthService) {
@@ -47,6 +37,107 @@ export class MaintenanceTComponent implements OnInit {
   ngOnInit(): void {
    
   }
+
+  filter(){
+    this.unresolved= [];
+    this.resolved = [];
+    this.tickets = [];
+    console.log(this.status)
+    if (this.loggedInUser.userRole.role == 'Landlord'){
+      if (this.status == 'all'){
+        console.log(this.status)
+        this.getTickets();
+      }
+      else if (this.status == 'unresolved'){
+        console.log(this.status)
+        this.getByStatusUnresolved();
+      } else {
+        console.log(this.status)
+        this.getByStatusResolved();
+      }
+    }
+    else {
+      if (this.status == 'all'){
+        console.log(this.status)
+        this.getAllTicketsByAuthor();
+      }
+      else if (this.status == 'unresolved'){
+        console.log(this.status)
+        this.getByTenantStatusUnresolved();
+      }
+      else {
+        console.log(this.status)
+        this.getByTenantStatusResolved();
+      }
+  }
+}
+  getByTenantStatusResolved() {
+    this.ms. getAllTicketsByAuthor(this.loggedInUser.userID).subscribe(
+      (response: Ticket[]) => {
+        this.tickets2 = response;
+        console.log(this.loggedInUser.userRole.role)
+        for (let t of this.tickets2) {
+          if (t.statusId.status == 'Resolved'){
+            this.resolved.push(t);
+            this.tickets = this.resolved;
+            console.log("resolved")
+          }
+        }
+      }
+      ) 
+  }
+  getByTenantStatusUnresolved() {
+    this.ms. getAllTicketsByAuthor(this.loggedInUser.userID).subscribe(
+      (response: Ticket[]) => {
+        this.tickets2 = response;
+        console.log(this.loggedInUser.userRole.role)
+        for (let t of this.tickets2) {
+          if (t.statusId.status == 'Unresolved'){
+            this.unresolved.push(t);
+            this.tickets = this.unresolved;
+            console.log("unresolved")
+          }
+        }
+      }
+      ) 
+  }
+  getByStatusResolved() {
+    this.ms.getAllTickets().subscribe(
+      (response: Ticket[]) => {
+        this.tickets2 = response;
+        console.log(this.loggedInUser.userRole.role)
+        for (let t of this.tickets2) {
+          if (t.statusId.status == 'Resolved'){
+            this.resolved.push(t);
+            this.tickets = this.resolved;
+           console.log("resolved")
+          }
+        }
+      }
+      ) 
+    
+  }
+  getByStatusUnresolved() {
+    this.ms.getAllTickets().subscribe(
+      (response: Ticket[]) => {
+        this.tickets2 = response;
+        console.log(this.tickets2)
+        console.log(this.loggedInUser.userRole.role)
+        for (let t of this.tickets2) {
+          if (t.statusId.status == 'Unresolved'){
+            this.unresolved.push(t);
+            this.tickets = this.unresolved;
+           console.log(this.tickets)
+           console.log("unresolved")
+          }
+        }
+      }
+      ) 
+  }
+  
+
+
+
   getTickets() {
     this.ms.getAllTickets().subscribe(
       (response: Ticket[]) => {
@@ -73,7 +164,7 @@ export class MaintenanceTComponent implements OnInit {
       }
       this.ms.resolve(model).subscribe(result => {
         if(result){
-          this.getAllTicketsByAuthor() ;
+          this.getTickets();
         }
       });
     }
@@ -86,7 +177,8 @@ export class MaintenanceTComponent implements OnInit {
     console.log(this.model.description)
     this.ms.addTicket(t).subscribe(
       (response: Ticket[]) => {
-        this.tickets = response;
+        this.tickets2 = response;
+        this.getAllTicketsByAuthor()
        
       }
     )

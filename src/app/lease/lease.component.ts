@@ -41,6 +41,7 @@ export class LeaseComponent implements OnInit {
       this.isLandlord = true;
       this.leaseService.getAllLeases(status).subscribe(result => {
         this.leases = result;
+        console.log(status)
       });
     }
   }
