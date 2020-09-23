@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/auth.service';
 import { LeaseService } from 'app/services/lease.service';
+import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-lease',
@@ -16,6 +17,15 @@ export class LeaseComponent implements OnInit {
   leaseDetail: any;
   leases: any;
   status  = 'all';
+  fileReader: FileReader = new FileReader();
+  retrieveResponse: any;
+  base64Data: any;
+  retrievedFile: string;
+  showFile = false;
+  signedLeaseFile: File;
+  selectedFiles: FileList;
+  message ='';
+
   constructor(private http: HttpClient,
     private router: Router,
     private authService: AuthService,
@@ -41,9 +51,18 @@ export class LeaseComponent implements OnInit {
       this.isLandlord = true;
       this.leaseService.getAllLeases(status).subscribe(result => {
         this.leases = result;
+        // for (let lf of this.leases.leaseFile) {
+        //   this.retrievedImage.push('data:image/jpeg;base64,' + lf.picByte)
+        // }
       });
     }
   }
+
+  showLeaseFile(){
+
+  }
+
+
   landlordSign(leaseID){
     const model = {
       party: 'landlord',
@@ -66,7 +85,38 @@ export class LeaseComponent implements OnInit {
       }
     });
   }
+
+  // uploadLease(signedLeaseFile) {
+
+  //   this.leaseService.uploadLease(signedLeaseFile).subscribe(result => {
+  //     if(result) {
+
+  //     }
+  //   })
+  // }
+
+  selectFile(event) {
+    this.selectedFiles = event.target.files;
+  }
+
+  uploadLease() {
+    this.signedLeaseFile = this.selectedFiles.item(0);
+    console.log(typeof this.signedLeaseFile);
+    console.log(this.signedLeaseFile);
+    
+    this.leaseService.uploadLease(this.signedLeaseFile).subscribe(result => {
+      if (result instanceof HttpResponse) {
+        this.message = result.body.message;
+      }
+    }, err => {
+      this.message = 'Could not upload the file!';
+      this.signedLeaseFile = undefined;
+    })
+    this.selectedFiles = undefined;
+  }
+
   renew(leaseID){
    this.tenantSign(leaseID);
   }
+
 }

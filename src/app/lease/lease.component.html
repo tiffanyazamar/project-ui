@@ -1,67 +1,80 @@
 <div *ngIf="isLandlord">
-    <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <h4 class="card-title">Contracts</h4>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <select class = "form-control" style = "width:150px; margin-bottom: 10px;" name = "filter" [(ngModel)] = "status" (change) = "filter()">
-                  <option value = "all" selected>All</option>
-                  <option value = "signed">Signed</option>
-                  <option value = "notSigned">Not Yet Signed</option>
-                </select>
-                <table class="table">
-                  <thead class=" text-primary">
-                    <th></th>
-                    <th>Tenant Name</th>
-                    <th>Least Start Date</th>
-                    <th>Lease End Date</th>
-                    <th>Tenant Signed</th>
-                    <th>Tenant Signed Date</th>
-                    <th>Landlord Signed Date</th>
-                    <th>Options</th>
-                  </thead>
-      
-                  <tbody>
-                    <tr *ngFor="let lease of leases">
-                      <td> 
-                        <div class="avatar">
-                          <img src="../../assets/images/faces/{{lease.user.username}}.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                        </div>
-                      </td>
-                      <td>{{lease.user.firstName}} {{lease.user.lastName}}</td>
-                      <td>{{lease.startDate | date:'MM/dd/yyyy'}}</td>
-                      <td>{{lease.endDate | date:'MM/dd/yyyy'}}</td>
-                      <td>{{lease.tenantSig?'Signed':'Not yet signed'}}</td>
-                      <td>{{lease.tenantSigDate | date:'MM/dd/yyyy'}}</td>
-                      <td>{{lease.landlordSigDate | date:'MM/dd/yyyy'}}</td>
-                      <td><button *ngIf = "!lease.landlordSig" class = "btn btn-success" (click) = "landlordSign(lease.leaseID)">Sign</button></td>
-                    </tr>
-                  </tbody>
-                  
-                </table>
-              </div>
-            </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Contracts</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <select class="form-control" style="width:150px; margin-bottom: 10px;" name="filter" [(ngModel)]="status"
+              (change)="filter()">
+              <option value="all" selected>All</option>
+              <option value="signed">Signed</option>
+              <option value="notSigned">Not Yet Signed</option>
+            </select>
+            <table class="table">
+              <thead class=" text-primary">
+                <th></th>
+                <th>Tenant Name</th>
+                <th>Least Start Date</th>
+                <th>Lease End Date</th>
+                <th>Tenant Signed</th>
+                <th>Tenant Signed Date</th>
+                <th>Landlord Signed Date</th>
+                <th>File</th>
+                <th>Options</th>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let lease of leases">
+                  <td>
+                    <div class="avatar">
+                      <img src="../../assets/images/faces/{{lease.user.username}}.jpg" alt="Circle Image"
+                        class="img-circle img-no-padding img-responsive">
+                    </div>
+                  </td>
+                  <td>{{lease.user.firstName}} {{lease.user.lastName}}</td>
+                  <td>{{lease.startDate | date:'MM/dd/yyyy'}}</td>
+                  <td>{{lease.endDate | date:'MM/dd/yyyy'}}</td>
+                  <td>{{lease.tenantSig?'Signed':'Not yet signed'}}</td>
+                  <td>{{lease.tenantSigDate | date:'MM/dd/yyyy'}}</td>
+                  <td>{{lease.landlordSigDate | date:'MM/dd/yyyy'}}</td>
+                  <td>
+                    <button class="btn btn-success" (click)="showLeaseFile()">View Lease</button>
+                    <!-- <div id="myModal" class="modal" hide="showFile">
+                          <span class="close" (click)="hideLeaseFile()">&times;</span>
+                          <img class="modal-content" id="img01" src="retrievedFile">
+                        </div> -->
+                    <div>
+                      <div>
+                        <img src="data:image/png;base64,{{lease.leaseFile}}">
+                      </div>
+                    </div>
+                  </td>
+
+                  <td><button *ngIf="!lease.landlordSig" class="btn btn-success"
+                      (click)="landlordSign(lease.leaseID)">Sign</button></td>
+                </tr>
+              </tbody>
+
+            </table>
           </div>
         </div>
       </div>
-      
+    </div>
+  </div>
+
 </div>
 <div *ngIf="!isLandlord">
   My Lease
 
-  <div class="card card-user" *ngIf = "leaseDetail">
+  <div class="card card-user" *ngIf="leaseDetail">
     <div class="image"></div>
     <div class="card-body">
       <div class="author">
         <a href="#">
-          <img
-            class="avatar border-gray"
-            src="assets/images/faces/{{ loggedInUser.username }}.jpg"
-            alt="..."
-          />
+          <img class="avatar border-gray" src="assets/images/faces/{{ loggedInUser.username }}.jpg" alt="..." />
           <h5 class="title">
             Contract Detail for {{ loggedInUser.firstName }} {{ loggedInUser.lastName }}
           </h5>
@@ -70,34 +83,58 @@
           Lease Start Date: {{ leaseDetail.startDate | date: "MM/dd/yyyy" }}
         </p>
         <p class="description">
-            Lease End Date: {{ leaseDetail.endDate | date: "MM/dd/yyyy" }}
+          Lease End Date: {{ leaseDetail.endDate | date: "MM/dd/yyyy" }}
         </p>
         <p class="description">
-            Tenant Signed on: {{ leaseDetail.tenantSigDate | date: "MM/dd/yyyy"}}
+          Tenant Signed on: {{ leaseDetail.tenantSigDate | date: "MM/dd/yyyy"}}
         </p>
         <p class="description">
-            Landlord Signed: {{ leaseDetail.landlordSig? 'Signed' : 'Not yet signed'}}
+          Landlord Signed: {{ leaseDetail.landlordSig? 'Signed' : 'Not yet signed'}}
         </p>
         <p class="description">
-            Landlord Signed on: {{ leaseDetail.landlordSigDate | date: "MM/dd/yyyy"}}
+          Landlord Signed on: {{ leaseDetail.landlordSigDate | date: "MM/dd/yyyy"}}
         </p>
       </div>
-      
+
     </div>
     <div class="card-footer">
       <hr />
       <div class="button-container">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-6 ml-auto">
-           <button class = "btn btn-warning" (click) = "renew(leaseDetail.leaseID)">Renew Contract</button>
+            <button class="btn btn-warning" (click)="renew(leaseDetail.leaseID)">Renew Contract</button>
           </div>
           <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
-            <button class = "btn btn-danger">Terminate Contract</button>
+            <button class="btn btn-danger">Terminate Contract</button>
           </div>
         </div>
       </div>
     </div>
+    <div class="currLease" *ngIf="leaseDetail.leaseFile != null">
+      <img src="data:image/png;base64,{{leaseDetail.leaseFile}}">
+    </div>
   </div>
 
-  <div class="card card-user" *ngIf = "!leaseDetail"> You have no active contract</div>
+
+
+  <div class="card card-user" *ngIf="!leaseDetail"> You have no active contract</div>
+
+  <br><br>
+
+  <div>
+    <div class="leaseFile">
+      <a href="assets/LeaseForms/blank_lease.png" download="lease_form">
+        <figure>
+          <img src="assets/LeaseForms/blank_lease.png" width="150">
+          <figcaption>Download Lease Form and Sign</figcaption>
+        </figure>
+      </a>
+    </div>
+    <div class="leaseFile">
+      <input type="file" (change)="selectFile($event)">
+      <button [disabled]="!selectedFiles" (click)="uploadLease(leaseDetail.leaseID)">Upload</button>
+      <div class="alert alert-light" role="alert">{{ message }}</div>
+    </div>
+  </div>
+
 </div>
