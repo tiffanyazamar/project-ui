@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from 'app/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class LeaseService {
       .get<any>(`http://localhost:8080/chatelaine/lease/` + id);
   }
 
-  uploadLease(f:File) : Observable<HttpEvent<any>>{
+  uploadLease(f:File, u:User) : Observable<HttpEvent<any>>{
 
     const fd = new FormData();
     fd.append('file', f);

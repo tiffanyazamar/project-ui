@@ -102,7 +102,7 @@ export class LeaseComponent implements OnInit {
     console.log(typeof this.signedLeaseFile);
     console.log(this.signedLeaseFile);
     
-    this.leaseService.uploadLease(this.signedLeaseFile).subscribe(result => {
+    this.leaseService.uploadLease(this.signedLeaseFile,this.loggedInUser).subscribe(result => {
       if (result instanceof HttpResponse) {
         this.message = result.body.message;
       }
