@@ -133,7 +133,7 @@
     <div class="leaseFile">
       <input type="file" (change)="selectFile($event)">
       <button [disabled]="!selectedFiles" (click)="uploadLease(leaseDetail.leaseID)">Upload</button>
-      <div class="alert alert-light" role="alert">{{ message }}</div>
+      <div role="alert">{{ message }}</div>
     </div>
   </div>
 

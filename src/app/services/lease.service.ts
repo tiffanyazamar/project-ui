@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpHeaders, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { User } from 'app/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,14 @@ import { Observable } from 'rxjs';
 export class LeaseService {
   sign(model: any) {
     return  this.http
-    .post<any>('http://localhost:8080/chatelaine/lease/update', model);
+    .post<any>('http://localhost:8080/chatelaine/lease/update', model, {
+      responseType: 'json',
+      withCredentials: true,
+      headers : new HttpHeaders({
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Origin': '*',
+        })
+      })
   }
   getAllLeases(status:string) {
     return  this.http
@@ -37,4 +45,5 @@ export class LeaseService {
     });
     return this.http.request(req);
   }
+
 }

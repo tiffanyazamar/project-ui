@@ -49,18 +49,40 @@ export class EventsComponent implements OnInit {
   ngOnInit() {
   }
 
+  chronological( a, b ) {
+    if ( a.eventDate < b.eventDate ){
+      return -1;
+    }
+    if ( a.eventDate > b.eventDate ){
+      return 1;
+    }
+    return 0;
+  }
+
+  reverseChron( a, b ) {
+    if ( a.eventDate < b.eventDate ){
+      return 1;
+    }
+    if ( a.eventDate > b.eventDate ){
+      return -1;
+    }
+    return 0;
+  }
+
   getEvents() {
     this.es.getAllEvents().subscribe(
       (response: Event[]) => {
         this.events = response;
 
+        console.log(this.now),
+        console.log(this.tenFromNow);
         for (let ev of this.events) {
           if (ev.eventDate >= this.now.getTime() && ev.eventDate <= this.tenFromNow) {
             this.upcomingEvents.push(ev);
-            this.upcomingEvents.sort().reverse();
-          } else {
+            this.upcomingEvents.sort(this.chronological);
+          } else if (ev.eventDate < this.now.getTime()){
             this.pastEvents.push(ev);
-            this.pastEvents.sort();
+            this.pastEvents.sort(this.reverseChron);
           }
         }
       }
@@ -74,10 +96,10 @@ export class EventsComponent implements OnInit {
         for (let ev of this.events) {
           if (ev.eventDate >= this.now.getTime() && ev.eventDate <= this.tenFromNow) {
             this.upcomingEvents.push(ev);
-            this.upcomingEvents.sort().reverse();
-          } else {
+            this.upcomingEvents.sort(this.chronological);
+          } else if (ev.eventDate < this.now.getTime()){
             this.pastEvents.push(ev);
-            this.pastEvents.sort();
+            this.pastEvents.sort(this.reverseChron);
           }
         }
       }
