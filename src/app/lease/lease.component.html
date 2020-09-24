@@ -23,7 +23,7 @@
                 <th>Tenant Signed Date</th>
                 <th>Landlord Signed Date</th>
                 <th>File</th>
-                <th>Options</th>
+                <th>Action</th>
               </thead>
 
               <tbody>
@@ -41,18 +41,8 @@
                   <td>{{lease.tenantSigDate | date:'MM/dd/yyyy'}}</td>
                   <td>{{lease.landlordSigDate | date:'MM/dd/yyyy'}}</td>
                   <td>
-                    <button class="btn btn-success" (click)="showLeaseFile()">View Lease</button>
-                    <!-- <div id="myModal" class="modal" hide="showFile">
-                          <span class="close" (click)="hideLeaseFile()">&times;</span>
-                          <img class="modal-content" id="img01" src="retrievedFile">
-                        </div> -->
-                    <div>
-                      <div>
-                        <img src="data:image/png;base64,{{lease.leaseFile}}">
-                      </div>
-                    </div>
+                    <a href="data:image/png;base64,{{lease.leaseFile}}" download="contract"><button class="btn btn-success">PDF</button></a>
                   </td>
-
                   <td><button *ngIf="!lease.landlordSig" class="btn btn-success"
                       (click)="landlordSign(lease.leaseID)">Sign</button></td>
                 </tr>
@@ -94,6 +84,8 @@
         <p class="description">
           Landlord Signed on: {{ leaseDetail.landlordSigDate | date: "MM/dd/yyyy"}}
         </p>
+        <p>
+        </p>
       </div>
 
     </div>
@@ -110,30 +102,33 @@
         </div>
       </div>
     </div>
-    <div class="currLease" *ngIf="leaseDetail.leaseFile != null">
-      <img src="data:image/png;base64,{{leaseDetail.leaseFile}}">
-    </div>
+  </div>
+
+  <h4 class="center">Current Contract</h4>
+  <div class="center" *ngIf="leaseDetail.leaseFile != null" > 
+    <a href="data:image/png;base64,{{leaseDetail.leaseFile}}" download="contract" class="center">
+      <img src="data:image/png;base64,{{leaseDetail.leaseFile}}" class="center">
+    </a>
   </div>
 
 
 
   <div class="card card-user" *ngIf="!leaseDetail"> You have no active contract</div>
 
-  <br><br>
+  <br><br><br><br><br>
 
   <div>
-    <div class="leaseFile">
+    <div class="" >
       <a href="assets/LeaseForms/blank_lease.png" download="lease_form">
-        <figure>
-          <img src="assets/LeaseForms/blank_lease.png" width="150">
-          <figcaption>Download Lease Form and Sign</figcaption>
-        </figure>
+        <button class="btn btn-success">Download a Blank Lease Form</button>
       </a>
     </div>
-    <div class="leaseFile">
+    <br><br><br>
+    <div class="">
+      <h5>upload a signed lease</h5>
       <input type="file" (change)="selectFile($event)">
-      <button [disabled]="!selectedFiles" (click)="uploadLease(leaseDetail.leaseID)">Upload</button>
-      <div class="alert alert-light" role="alert">{{ message }}</div>
+      <button class="btn btn-success" [disabled]="!selectedFiles" (click)="uploadLease(leaseDetail.leaseID)">Upload</button>
+      <div role="alert">{{ message }}</div>
     </div>
   </div>
 

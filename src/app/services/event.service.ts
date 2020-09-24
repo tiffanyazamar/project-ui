@@ -10,6 +10,8 @@ import { Event } from '../models/event';
 export class EventService {
 
   url:string = "http://localhost:8080/chatelaine/event/"
+  weatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=39&lon=-104&units=imperial&appid=b2a76d4a4cecf0114e9e756042fe8a0b";
+
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   }
@@ -44,5 +46,9 @@ export class EventService {
   addEvent(e): Observable<Event[]> {
     console.log(e);
     return this.http.post<Event[]>(this.url, e, this.httpOptions);
+  }
+
+  getWeather() {
+    return this.http.get<any>(this.weatherUrl);
   }
 }

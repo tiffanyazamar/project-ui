@@ -3,7 +3,6 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/auth.service';
 import { LeaseService } from 'app/services/lease.service';
-import { ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-lease',
@@ -111,6 +110,7 @@ export class LeaseComponent implements OnInit {
       this.signedLeaseFile = undefined;
     })
     this.selectedFiles = undefined;
+    this.getLease('all');
   }
 
   renew(leaseID){
