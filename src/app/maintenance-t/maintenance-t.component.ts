@@ -35,7 +35,11 @@ export class MaintenanceTComponent implements OnInit {
    }
 
   ngOnInit(): void {
-   
+    if(this.loggedInUser.userRole.role ==='Landlord'){
+      this.getTickets();
+    }else if(this.loggedInUser.userRole.role =='Tenant'){
+      this.getAllTicketsByAuthor();
+    }
   }
 
   filter(){
