@@ -23,7 +23,7 @@ export class LeaseService {
       .get<any>(`http://localhost:8080/chatelaine/lease/` + id);
   }
 
-  uploadLease(f:File, u:User) : Observable<HttpEvent<any>>{
+  uploadLease(f:File) : Observable<HttpEvent<any>>{
 
     const fd = new FormData();
     fd.append('file', f);
