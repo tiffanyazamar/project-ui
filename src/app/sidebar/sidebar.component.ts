@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { AuthService } from 'app/auth.service';
+import { Router } from '@angular/router';
 
 
 export interface RouteInfo {
@@ -15,7 +16,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/tickets', title: 'Maintenance Tickets', icon: 'fas fa-clipboard-list', class: '' },
     { path: '/lease', title: 'Lease Management', icon: 'fas fa-file-signature', class: '' },
     { path: '/user', title: 'User Profile', icon: 'fas fa-cogs', class: '' },
-    { path: '/logout',    title: 'Logout',        icon:'fas fa-sign-out-alt', class: '' },
+    // { path: '/logout',    title: 'Logout',        icon:'fas fa-sign-out-alt', class: '' },
     // { path: '/upgrade',       title: 'Upgrade to PRO',    icon:'nc-spaceship',  class: 'active-pro' },
 ];
 
@@ -30,7 +31,8 @@ export class SidebarComponent implements OnInit, OnChanges {
 
     public menuItems: any[];
     loggedIn = false;
-    constructor() { }
+    constructor(private authService: AuthService, 
+        private router: Router) { }
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
         if (this.loggedInUser) {
@@ -42,4 +44,8 @@ export class SidebarComponent implements OnInit, OnChanges {
     ngOnChanges() {
         this.ngOnInit();
     }
-}
+    logout(){
+        this.authService.loggedInUser = null;
+        this.router.navigate(['ourTeam']);
+    }
+} 

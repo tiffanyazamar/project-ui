@@ -25,6 +25,6 @@ export const AppRoutes: Routes = [
 
   {
     path: '**',
-    redirectTo: 'home'
+    redirectTo: 'ourTeam'
   }
 ]
