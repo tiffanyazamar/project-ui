@@ -37,9 +37,12 @@ export class EventsComponent implements OnInit {
   hideUpcoming:boolean=false;
   uninvited:User[] = [];
   invited:User[] = [];
+  dailies;
+  eventWeather = [];
 
   constructor(private es: EventService, private authservice: AuthService) {
     this.loggedInUser = authservice.loggedInUser;
+    //this.getWeather();
     if (this.loggedInUser.userRole.role=='Landlord') {
       this.getEvents()
       this.getAllUsers()
@@ -48,6 +51,12 @@ export class EventsComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  getWeather(){
+    this.es.getWeather().subscribe(result=>{
+      this.dailies = result.daily;
+    })
+   }
 
   chronological( a, b ) {
     if ( a.eventDate < b.eventDate ){
@@ -84,6 +93,12 @@ export class EventsComponent implements OnInit {
             this.pastEvents.push(ev);
             this.pastEvents.sort(this.reverseChron);
           }
+
+          // for (let daily of this.dailies) {
+          //   if (daily.dt * 1000 == ev.eventDate) {
+          //     eventWeather.push(daily);
+          //   } 
+          // }
         }
       }
     )
@@ -152,10 +167,13 @@ export class EventsComponent implements OnInit {
       (response: Event[]) => {
         this.events = response;
         console.log(this.events)
+        if (this.loggedInUser.userRole.role=='Landlord') {
+          this.getEvents()
+        } else if(this.loggedInUser.userRole.role=='Tenant') {this.getEventsByGuest()}
       }
     )
     this.newEventName=null;
-    this.newEventDesc=null;
+    this.newEventDesc="";
     this.newEventDate=null;
     this.invited=null;
     this.uninvited=this.allUsers;

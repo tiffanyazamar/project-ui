@@ -20,4 +20,25 @@ td{
     /* margin-bottom: 15px; */
 }
 
+.center {
+    margin: auto;
+}
 
+h4{
+    text-transform: bold;
+}
+
+
+/* #container {
+    width: 100%;
+    margin: auto;
+}
+#first {
+    width: 45%;
+    float: left;
+}
+#second {
+    width: 45%;
+    float: left;
+
+} */

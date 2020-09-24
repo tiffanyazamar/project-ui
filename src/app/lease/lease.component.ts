@@ -110,6 +110,7 @@ export class LeaseComponent implements OnInit {
       this.signedLeaseFile = undefined;
     })
     this.selectedFiles = undefined;
+    this.getLease('all');
   }
 
   renew(leaseID){

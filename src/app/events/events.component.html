@@ -10,7 +10,7 @@
 
 
 <div *ngIf="hideUpcoming==false">
-<div class="container-fluid my-5 justify-content-center" *ngFor="let e of upcomingEvents" >
+<div class="container-fluid my-5 justify-content-center" *ngFor="let e of upcomingEvents">
     <div class=" row justify-content-center ">
         <div class="col-lg-4 col-12 mt-5 ">
             <div class="card mt-3 ">
@@ -19,8 +19,18 @@
                     </div>
                     <div class="row text-center name">
                         <div class="col">
-                            <h4>{{e.eventDate | date:'medium'}}</h4>
-                            <p></p>
+                          <h4>{{e.eventDate | date:'medium'}}</h4>
+                          <!-- <span>
+                            <div class = "row">
+                              <div>
+                                  <img width = "50px" height = "50px" src= "http://openweathermap.org/img/wn/{{daily.weather[0].icon}}@2x.png"/>
+                              </div>
+                              <div style = "align-self: center;">
+                                  <p style = "margin: 0 0 0 0">{{daily.temp.min | number: '1.0-0'}}<i class="small-degree far fa-circle"></i> F</p>
+                                  <p style = "margin: 0 0 0 0"> {{daily.temp.max | number: '1.0-0'}}<i class="small-degree far fa-circle"></i> F</p>
+                              </div>
+                            </div>
+                          </span> -->
                         </div>
                     </div>
                 </div>
