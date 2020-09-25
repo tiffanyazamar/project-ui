@@ -82,7 +82,7 @@ export class EventsComponent implements OnInit {
     this.es.getAllEvents().subscribe(
       (response: Event[]) => {
         this.events = response;
-
+        console.log(this.events)
         console.log(this.now),
         console.log(this.tenFromNow);
         for (let ev of this.events) {
@@ -108,6 +108,7 @@ export class EventsComponent implements OnInit {
     this.es.getEventsByGuest(this.loggedInUser.userID).subscribe(
       (response: Event[]) => {
         this.events = response;
+        console.log(this.events)
         for (let ev of this.events) {
           if (ev.eventDate >= this.now.getTime() && ev.eventDate <= this.tenFromNow) {
             this.upcomingEvents.push(ev);
