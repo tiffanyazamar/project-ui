@@ -33,7 +33,7 @@ export class EventsComponent implements OnInit {
   upcomingEvents:Event[] = [];
   pastEvents:Event[] = [];
   now:any = new Date();
-  tenFromNow:any = this.now.getTime() + (1000 * 60 * 60 * 24 * 10);
+  tenFromNow:any = this.now.getTime() + (1000 * 60 * 60 * 24 * 365);
   hideUpcoming:boolean=false;
   uninvited:User[] = [];
   invited:User[] = [];
