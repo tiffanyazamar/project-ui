@@ -4,6 +4,13 @@ tbody {
     color: white;
     
 }
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
 </style>
 
 
@@ -23,8 +30,9 @@ tbody {
         <div class="table-responsive">
           <table class="table">
             <thead class=" text-primary">
+              <th> </th>
               <th>
-                  ID
+                Ticket ID
               </th>
               <th>
                   Created By
@@ -49,6 +57,12 @@ tbody {
             <tbody *ngIf="loggedInUser.userRole.role=='Landlord'">
               <tr *ngFor="let t of tickets" >
                 <td>
+                  <div class="avatar">
+                    <img src="../../assets/images/faces/{{t.author.username}}.jpg" alt="Circle Image"
+                      class="img-circle img-no-padding img-responsive">
+                  </div>
+                </td>
+                <td class="text-left">
                   {{t.ticketId}}
                 </td>
                 <td>
@@ -74,6 +88,12 @@ tbody {
                <tbody *ngIf="loggedInUser.userRole.role =='Tenant'">
               <tr *ngFor="let t of tickets">
                 <td>
+                  <div class="avatar">
+                    <img src="../../assets/images/faces/{{t.author.username}}.jpg" alt="Circle Image"
+                      class="img-circle img-no-padding img-responsive">
+                  </div>
+                </td>
+                <td class="text-left">
                   {{t.ticketId}}
                 </td>
                 <td>
