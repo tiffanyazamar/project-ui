@@ -173,7 +173,7 @@ export class EventsComponent implements OnInit {
       }
     )
     this.newEventName=null;
-    this.newEventDesc="";
+    this.newEventDesc=null;
     this.newEventDate=null;
     this.invited=null;
     this.uninvited=this.allUsers;
