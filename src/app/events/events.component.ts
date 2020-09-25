@@ -167,17 +167,31 @@ export class EventsComponent implements OnInit {
     this.es.addEvent(e).subscribe(
       (response: Event[]) => {
         this.events = response;
-        console.log(this.events)
-        if (this.loggedInUser.userRole.role=='Landlord') {
-          this.getEvents()
-        } else if(this.loggedInUser.userRole.role=='Tenant') {this.getEventsByGuest()}
+        this.upcomingEvents = [];
+        this.pastEvents = [];
+        for (let ev of this.events) {
+          if (ev.eventDate >= this.now.getTime() && ev.eventDate <= this.tenFromNow) {
+            this.upcomingEvents.push(ev);
+            this.upcomingEvents.sort(this.chronological);
+          } else if (ev.eventDate < this.now.getTime()){
+            this.pastEvents.push(ev);
+            this.pastEvents.sort(this.reverseChron);
+          }
+        }
+
+        // console.log(this.events)
+        // if (this.loggedInUser.userRole.role=='Landlord') {
+        //   this.getEvents()
+        // } else if(this.loggedInUser.userRole.role=='Tenant') {this.getEventsByGuest()}
       }
     )
     this.newEventName=null;
     this.newEventDesc=null;
     this.newEventDate=null;
+    for (let p of this.invited) {
+      this.uninvited.push(p);
+    }
     this.invited=null;
-    this.uninvited=this.allUsers;
   }
 
   toggleEvents(value:number) {
